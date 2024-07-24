@@ -1,10 +1,7 @@
 import { BinaryReader, BinaryWriter } from "./binary";
 import { bytesFromBase64, base64FromBytes } from "./helpers";
 export enum HashOp {
-  /**
-   * NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument
-   * some places.
-   */
+  /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
   NO_HASH = 0,
   SHA256 = 1,
   SHA512 = 2,
@@ -76,27 +73,15 @@ export enum LengthOp {
   VAR_RLP = 2,
   /** FIXED32_BIG - FIXED32_BIG uses big-endian encoding of the length as a 32 bit integer */
   FIXED32_BIG = 3,
-  /**
-   * FIXED32_LITTLE - FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit
-   * integer
-   */
+  /** FIXED32_LITTLE - FIXED32_LITTLE uses little-endian encoding of the length as a 32 bit integer */
   FIXED32_LITTLE = 4,
   /** FIXED64_BIG - FIXED64_BIG uses big-endian encoding of the length as a 64 bit integer */
   FIXED64_BIG = 5,
-  /**
-   * FIXED64_LITTLE - FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit
-   * integer
-   */
+  /** FIXED64_LITTLE - FIXED64_LITTLE uses little-endian encoding of the length as a 64 bit integer */
   FIXED64_LITTLE = 6,
-  /**
-   * REQUIRE_32_BYTES - REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32
-   * bytes (sha256 output)
-   */
+  /** REQUIRE_32_BYTES - REQUIRE_32_BYTES is like NONE, but will fail if the input is not exactly 32 bytes (sha256 output) */
   REQUIRE_32_BYTES = 7,
-  /**
-   * REQUIRE_64_BYTES - REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64
-   * bytes (sha512 output)
-   */
+  /** REQUIRE_64_BYTES - REQUIRE_64_BYTES is like NONE, but will fail if the input is not exactly 64 bytes (sha512 output) */
   REQUIRE_64_BYTES = 8,
   UNRECOGNIZED = -1,
 }
@@ -167,19 +152,21 @@ export function lengthOpToJSON(object: LengthOp): string {
  * The result of peforming all these steps will provide a "root hash", which can
  * be compared to the value in a header.
  * 
- * Since it is computationally infeasible to produce a hash collission for any of
- * the used cryptographic hash functions, if someone can provide a series of
- * operations to transform a given key and value into a root hash that matches some
- * trusted root, these key and values must be in the referenced merkle tree.
+ * Since it is computationally infeasible to produce a hash collission for any of the used
+ * cryptographic hash functions, if someone can provide a series of operations to transform
+ * a given key and value into a root hash that matches some trusted root, these key and values
+ * must be in the referenced merkle tree.
  * 
- * The only possible issue is maliablity in LeafOp, such as providing extra prefix
- * data, which should be controlled by a spec. Eg. with lengthOp as NONE, prefix =
- * FOO, key = BAR, value = CHOICE and prefix = F, key = OOBAR, value = CHOICE would
- * produce the same value.
+ * The only possible issue is maliablity in LeafOp, such as providing extra prefix data,
+ * which should be controlled by a spec. Eg. with lengthOp as NONE,
+ * prefix = FOO, key = BAR, value = CHOICE
+ * and
+ * prefix = F, key = OOBAR, value = CHOICE
+ * would produce the same value.
  * 
- * With LengthOp this is tricker but not impossible. Which is why the
- * "leafPrefixEqual" field in the ProofSpec is valuable to prevent this mutability.
- * And why all trees should length-prefix the data before hashing it.
+ * With LengthOp this is tricker but not impossible. Which is why the "leafPrefixEqual" field
+ * in the ProofSpec is valuable to prevent this mutability. And why all trees should
+ * length-prefix the data before hashing it.
  */
 export interface ExistenceProof {
   key: Uint8Array;
@@ -196,19 +183,21 @@ export interface ExistenceProofProtoMsg {
  * The result of peforming all these steps will provide a "root hash", which can
  * be compared to the value in a header.
  * 
- * Since it is computationally infeasible to produce a hash collission for any of
- * the used cryptographic hash functions, if someone can provide a series of
- * operations to transform a given key and value into a root hash that matches some
- * trusted root, these key and values must be in the referenced merkle tree.
+ * Since it is computationally infeasible to produce a hash collission for any of the used
+ * cryptographic hash functions, if someone can provide a series of operations to transform
+ * a given key and value into a root hash that matches some trusted root, these key and values
+ * must be in the referenced merkle tree.
  * 
- * The only possible issue is maliablity in LeafOp, such as providing extra prefix
- * data, which should be controlled by a spec. Eg. with lengthOp as NONE, prefix =
- * FOO, key = BAR, value = CHOICE and prefix = F, key = OOBAR, value = CHOICE would
- * produce the same value.
+ * The only possible issue is maliablity in LeafOp, such as providing extra prefix data,
+ * which should be controlled by a spec. Eg. with lengthOp as NONE,
+ * prefix = FOO, key = BAR, value = CHOICE
+ * and
+ * prefix = F, key = OOBAR, value = CHOICE
+ * would produce the same value.
  * 
- * With LengthOp this is tricker but not impossible. Which is why the
- * "leafPrefixEqual" field in the ProofSpec is valuable to prevent this mutability.
- * And why all trees should length-prefix the data before hashing it.
+ * With LengthOp this is tricker but not impossible. Which is why the "leafPrefixEqual" field
+ * in the ProofSpec is valuable to prevent this mutability. And why all trees should
+ * length-prefix the data before hashing it.
  */
 export interface ExistenceProofAmino {
   key?: string;
@@ -225,19 +214,21 @@ export interface ExistenceProofAminoMsg {
  * The result of peforming all these steps will provide a "root hash", which can
  * be compared to the value in a header.
  * 
- * Since it is computationally infeasible to produce a hash collission for any of
- * the used cryptographic hash functions, if someone can provide a series of
- * operations to transform a given key and value into a root hash that matches some
- * trusted root, these key and values must be in the referenced merkle tree.
+ * Since it is computationally infeasible to produce a hash collission for any of the used
+ * cryptographic hash functions, if someone can provide a series of operations to transform
+ * a given key and value into a root hash that matches some trusted root, these key and values
+ * must be in the referenced merkle tree.
  * 
- * The only possible issue is maliablity in LeafOp, such as providing extra prefix
- * data, which should be controlled by a spec. Eg. with lengthOp as NONE, prefix =
- * FOO, key = BAR, value = CHOICE and prefix = F, key = OOBAR, value = CHOICE would
- * produce the same value.
+ * The only possible issue is maliablity in LeafOp, such as providing extra prefix data,
+ * which should be controlled by a spec. Eg. with lengthOp as NONE,
+ * prefix = FOO, key = BAR, value = CHOICE
+ * and
+ * prefix = F, key = OOBAR, value = CHOICE
+ * would produce the same value.
  * 
- * With LengthOp this is tricker but not impossible. Which is why the
- * "leafPrefixEqual" field in the ProofSpec is valuable to prevent this mutability.
- * And why all trees should length-prefix the data before hashing it.
+ * With LengthOp this is tricker but not impossible. Which is why the "leafPrefixEqual" field
+ * in the ProofSpec is valuable to prevent this mutability. And why all trees should
+ * length-prefix the data before hashing it.
  */
 export interface ExistenceProofSDKType {
   key: Uint8Array;
@@ -285,10 +276,7 @@ export interface NonExistenceProofSDKType {
   left?: ExistenceProofSDKType;
   right?: ExistenceProofSDKType;
 }
-/**
- * CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch
- * of such messages
- */
+/** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProof {
   exist?: ExistenceProof;
   nonexist?: NonExistenceProof;
@@ -299,10 +287,7 @@ export interface CommitmentProofProtoMsg {
   typeUrl: "/ics23.CommitmentProof";
   value: Uint8Array;
 }
-/**
- * CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch
- * of such messages
- */
+/** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProofAmino {
   exist?: ExistenceProofAmino;
   nonexist?: NonExistenceProofAmino;
@@ -313,10 +298,7 @@ export interface CommitmentProofAminoMsg {
   type: "/ics23.CommitmentProof";
   value: CommitmentProofAmino;
 }
-/**
- * CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch
- * of such messages
- */
+/** CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages */
 export interface CommitmentProofSDKType {
   exist?: ExistenceProofSDKType;
   nonexist?: NonExistenceProofSDKType;
@@ -332,8 +314,9 @@ export interface CommitmentProofSDKType {
  * key and value are passed in. So that the signature of this operation is:
  * leafOp(key, value) -> output
  * 
- * To process this, first prehash the keys and values if needed (ANY means no hash
- * in this case): hkey = prehashKey(key) hvalue = prehashValue(value)
+ * To process this, first prehash the keys and values if needed (ANY means no hash in this case):
+ * hkey = prehashKey(key)
+ * hvalue = prehashValue(value)
  * 
  * Then combine the bytes, and hash it
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
@@ -344,8 +327,8 @@ export interface LeafOp {
   prehashValue: HashOp;
   length: LengthOp;
   /**
-   * prefix is a fixed bytes that may optionally be included at the beginning to
-   * differentiate a leaf node from an inner node.
+   * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
+   * a leaf node from an inner node.
    */
   prefix: Uint8Array;
 }
@@ -362,8 +345,9 @@ export interface LeafOpProtoMsg {
  * key and value are passed in. So that the signature of this operation is:
  * leafOp(key, value) -> output
  * 
- * To process this, first prehash the keys and values if needed (ANY means no hash
- * in this case): hkey = prehashKey(key) hvalue = prehashValue(value)
+ * To process this, first prehash the keys and values if needed (ANY means no hash in this case):
+ * hkey = prehashKey(key)
+ * hvalue = prehashValue(value)
  * 
  * Then combine the bytes, and hash it
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
@@ -374,8 +358,8 @@ export interface LeafOpAmino {
   prehash_value?: HashOp;
   length?: LengthOp;
   /**
-   * prefix is a fixed bytes that may optionally be included at the beginning to
-   * differentiate a leaf node from an inner node.
+   * prefix is a fixed bytes that may optionally be included at the beginning to differentiate
+   * a leaf node from an inner node.
    */
   prefix?: string;
 }
@@ -392,8 +376,9 @@ export interface LeafOpAminoMsg {
  * key and value are passed in. So that the signature of this operation is:
  * leafOp(key, value) -> output
  * 
- * To process this, first prehash the keys and values if needed (ANY means no hash
- * in this case): hkey = prehashKey(key) hvalue = prehashValue(value)
+ * To process this, first prehash the keys and values if needed (ANY means no hash in this case):
+ * hkey = prehashKey(key)
+ * hvalue = prehashValue(value)
  * 
  * Then combine the bytes, and hash it
  * output = hash(prefix || length(hkey) || hkey || length(hvalue) || hvalue)
@@ -407,8 +392,7 @@ export interface LeafOpSDKType {
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
- * It represents concatenating two children and hashing them to provide the next
- * result.
+ * It represents concatenating two children and hashing them to provide the next result.
  * 
  * The result of the previous step is passed in, so the signature of this op is:
  * innerOp(child) -> output
@@ -419,10 +403,9 @@ export interface LeafOpSDKType {
  * where the || operator is concatenation of binary data,
  * and child is the result of hashing all the tree below this step.
  * 
- * Any special data, like prepending child with the length, or prepending the
- * entire operation with some value to differentiate from leaf nodes, should be
- * included in prefix and suffix. If either of prefix or suffix is empty, we just
- * treat it as an empty string
+ * Any special data, like prepending child with the length, or prepending the entire operation with
+ * some value to differentiate from leaf nodes, should be included in prefix and suffix.
+ * If either of prefix or suffix is empty, we just treat it as an empty string
  */
 export interface InnerOp {
   hash: HashOp;
@@ -435,8 +418,7 @@ export interface InnerOpProtoMsg {
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
- * It represents concatenating two children and hashing them to provide the next
- * result.
+ * It represents concatenating two children and hashing them to provide the next result.
  * 
  * The result of the previous step is passed in, so the signature of this op is:
  * innerOp(child) -> output
@@ -447,10 +429,9 @@ export interface InnerOpProtoMsg {
  * where the || operator is concatenation of binary data,
  * and child is the result of hashing all the tree below this step.
  * 
- * Any special data, like prepending child with the length, or prepending the
- * entire operation with some value to differentiate from leaf nodes, should be
- * included in prefix and suffix. If either of prefix or suffix is empty, we just
- * treat it as an empty string
+ * Any special data, like prepending child with the length, or prepending the entire operation with
+ * some value to differentiate from leaf nodes, should be included in prefix and suffix.
+ * If either of prefix or suffix is empty, we just treat it as an empty string
  */
 export interface InnerOpAmino {
   hash?: HashOp;
@@ -463,8 +444,7 @@ export interface InnerOpAminoMsg {
 }
 /**
  * InnerOp represents a merkle-proof step that is not a leaf.
- * It represents concatenating two children and hashing them to provide the next
- * result.
+ * It represents concatenating two children and hashing them to provide the next result.
  * 
  * The result of the previous step is passed in, so the signature of this op is:
  * innerOp(child) -> output
@@ -475,10 +455,9 @@ export interface InnerOpAminoMsg {
  * where the || operator is concatenation of binary data,
  * and child is the result of hashing all the tree below this step.
  * 
- * Any special data, like prepending child with the length, or prepending the
- * entire operation with some value to differentiate from leaf nodes, should be
- * included in prefix and suffix. If either of prefix or suffix is empty, we just
- * treat it as an empty string
+ * Any special data, like prepending child with the length, or prepending the entire operation with
+ * some value to differentiate from leaf nodes, should be included in prefix and suffix.
+ * If either of prefix or suffix is empty, we just treat it as an empty string
  */
 export interface InnerOpSDKType {
   hash: HashOp;
@@ -504,15 +483,9 @@ export interface ProofSpec {
    */
   leafSpec?: LeafOp;
   innerSpec?: InnerSpec;
-  /**
-   * max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for
-   * fixed-depth tries)
-   */
+  /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
   maxDepth: number;
-  /**
-   * min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for
-   * fixed-depth tries)
-   */
+  /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   minDepth: number;
 }
 export interface ProofSpecProtoMsg {
@@ -538,15 +511,9 @@ export interface ProofSpecAmino {
    */
   leaf_spec?: LeafOpAmino;
   inner_spec?: InnerSpecAmino;
-  /**
-   * max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for
-   * fixed-depth tries)
-   */
+  /** max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries) */
   max_depth?: number;
-  /**
-   * min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for
-   * fixed-depth tries)
-   */
+  /** min_depth (if > 0) is the minimum number of InnerOps allowed (mainly for fixed-depth tries) */
   min_depth?: number;
 }
 export interface ProofSpecAminoMsg {
@@ -572,8 +539,8 @@ export interface ProofSpecSDKType {
   min_depth: number;
 }
 /**
- * InnerSpec contains all store-specific structure info to determine if two proofs
- * from a given store are neighbors.
+ * InnerSpec contains all store-specific structure info to determine if two proofs from a
+ * given store are neighbors.
  * 
  * This enables:
  * 
@@ -591,10 +558,7 @@ export interface InnerSpec {
   childSize: number;
   minPrefixLength: number;
   maxPrefixLength: number;
-  /**
-   * empty child is the prehash image that is used when one child is nil (eg. 20
-   * bytes of 0)
-   */
+  /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
   emptyChild: Uint8Array;
   /** hash is the algorithm that must be used for each InnerOp */
   hash: HashOp;
@@ -604,8 +568,8 @@ export interface InnerSpecProtoMsg {
   value: Uint8Array;
 }
 /**
- * InnerSpec contains all store-specific structure info to determine if two proofs
- * from a given store are neighbors.
+ * InnerSpec contains all store-specific structure info to determine if two proofs from a
+ * given store are neighbors.
  * 
  * This enables:
  * 
@@ -623,10 +587,7 @@ export interface InnerSpecAmino {
   child_size?: number;
   min_prefix_length?: number;
   max_prefix_length?: number;
-  /**
-   * empty child is the prehash image that is used when one child is nil (eg. 20
-   * bytes of 0)
-   */
+  /** empty child is the prehash image that is used when one child is nil (eg. 20 bytes of 0) */
   empty_child?: string;
   /** hash is the algorithm that must be used for each InnerOp */
   hash?: HashOp;
@@ -636,8 +597,8 @@ export interface InnerSpecAminoMsg {
   value: InnerSpecAmino;
 }
 /**
- * InnerSpec contains all store-specific structure info to determine if two proofs
- * from a given store are neighbors.
+ * InnerSpec contains all store-specific structure info to determine if two proofs from a
+ * given store are neighbors.
  * 
  * This enables:
  * 
@@ -655,7 +616,6 @@ export interface InnerSpecSDKType {
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProof {
-  /** BatchProof is a group of multiple proof types than can be compressed */
   entries: BatchEntry[];
 }
 export interface BatchProofProtoMsg {
@@ -664,7 +624,6 @@ export interface BatchProofProtoMsg {
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofAmino {
-  /** BatchProof is a group of multiple proof types than can be compressed */
   entries?: BatchEntryAmino[];
 }
 export interface BatchProofAminoMsg {

@@ -602,6 +602,71 @@ export interface QueryPinnedCodesResponseSDKType {
   code_ids: bigint[];
   pagination?: PageResponseSDKType;
 }
+/**
+ * QueryGaslessContractsRequest is the request type for the Query/GaslessContracts
+ * RPC method
+ */
+export interface QueryGaslessContractsRequest {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+export interface QueryGaslessContractsRequestProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.QueryGaslessContractsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryGaslessContractsRequest is the request type for the Query/GaslessContracts
+ * RPC method
+ */
+export interface QueryGaslessContractsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryGaslessContractsRequestAminoMsg {
+  type: "wasm/QueryGaslessContractsRequest";
+  value: QueryGaslessContractsRequestAmino;
+}
+/**
+ * QueryGaslessContractsRequest is the request type for the Query/GaslessContracts
+ * RPC method
+ */
+export interface QueryGaslessContractsRequestSDKType {
+  pagination?: PageRequestSDKType;
+}
+/**
+ * QueryGaslessContractsResponse is the response type for the
+ * Query/GaslessContracts RPC method
+ */
+export interface QueryGaslessContractsResponse {
+  contractAddresses: string[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+export interface QueryGaslessContractsResponseProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.QueryGaslessContractsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryGaslessContractsResponse is the response type for the
+ * Query/GaslessContracts RPC method
+ */
+export interface QueryGaslessContractsResponseAmino {
+  contract_addresses?: string[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryGaslessContractsResponseAminoMsg {
+  type: "wasm/QueryGaslessContractsResponse";
+  value: QueryGaslessContractsResponseAmino;
+}
+/**
+ * QueryGaslessContractsResponse is the response type for the
+ * Query/GaslessContracts RPC method
+ */
+export interface QueryGaslessContractsResponseSDKType {
+  contract_addresses: string[];
+  pagination?: PageResponseSDKType;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
@@ -2217,6 +2282,158 @@ export const QueryPinnedCodesResponse = {
     return {
       typeUrl: "/cosmwasm.wasm.v1.QueryPinnedCodesResponse",
       value: QueryPinnedCodesResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryGaslessContractsRequest(): QueryGaslessContractsRequest {
+  return {
+    pagination: undefined
+  };
+}
+export const QueryGaslessContractsRequest = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryGaslessContractsRequest",
+  encode(message: QueryGaslessContractsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGaslessContractsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGaslessContractsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryGaslessContractsRequest>): QueryGaslessContractsRequest {
+    const message = createBaseQueryGaslessContractsRequest();
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+  fromAmino(object: QueryGaslessContractsRequestAmino): QueryGaslessContractsRequest {
+    const message = createBaseQueryGaslessContractsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
+  },
+  toAmino(message: QueryGaslessContractsRequest): QueryGaslessContractsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGaslessContractsRequestAminoMsg): QueryGaslessContractsRequest {
+    return QueryGaslessContractsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGaslessContractsRequest): QueryGaslessContractsRequestAminoMsg {
+    return {
+      type: "wasm/QueryGaslessContractsRequest",
+      value: QueryGaslessContractsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGaslessContractsRequestProtoMsg): QueryGaslessContractsRequest {
+    return QueryGaslessContractsRequest.decode(message.value);
+  },
+  toProto(message: QueryGaslessContractsRequest): Uint8Array {
+    return QueryGaslessContractsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGaslessContractsRequest): QueryGaslessContractsRequestProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryGaslessContractsRequest",
+      value: QueryGaslessContractsRequest.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryGaslessContractsResponse(): QueryGaslessContractsResponse {
+  return {
+    contractAddresses: [],
+    pagination: undefined
+  };
+}
+export const QueryGaslessContractsResponse = {
+  typeUrl: "/cosmwasm.wasm.v1.QueryGaslessContractsResponse",
+  encode(message: QueryGaslessContractsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    for (const v of message.contractAddresses) {
+      writer.uint32(10).string(v!);
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryGaslessContractsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGaslessContractsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.contractAddresses.push(reader.string());
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryGaslessContractsResponse>): QueryGaslessContractsResponse {
+    const message = createBaseQueryGaslessContractsResponse();
+    message.contractAddresses = object.contractAddresses?.map(e => e) || [];
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+  fromAmino(object: QueryGaslessContractsResponseAmino): QueryGaslessContractsResponse {
+    const message = createBaseQueryGaslessContractsResponse();
+    message.contractAddresses = object.contract_addresses?.map(e => e) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
+  },
+  toAmino(message: QueryGaslessContractsResponse): QueryGaslessContractsResponseAmino {
+    const obj: any = {};
+    if (message.contractAddresses) {
+      obj.contract_addresses = message.contractAddresses.map(e => e);
+    } else {
+      obj.contract_addresses = message.contractAddresses;
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGaslessContractsResponseAminoMsg): QueryGaslessContractsResponse {
+    return QueryGaslessContractsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGaslessContractsResponse): QueryGaslessContractsResponseAminoMsg {
+    return {
+      type: "wasm/QueryGaslessContractsResponse",
+      value: QueryGaslessContractsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGaslessContractsResponseProtoMsg): QueryGaslessContractsResponse {
+    return QueryGaslessContractsResponse.decode(message.value);
+  },
+  toProto(message: QueryGaslessContractsResponse): Uint8Array {
+    return QueryGaslessContractsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGaslessContractsResponse): QueryGaslessContractsResponseProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.QueryGaslessContractsResponse",
+      value: QueryGaslessContractsResponse.encode(message).finish()
     };
   }
 };

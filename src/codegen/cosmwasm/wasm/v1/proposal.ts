@@ -521,6 +521,88 @@ export interface UnpinCodesProposalSDKType {
   code_ids: bigint[];
 }
 /**
+ * SetGasLessContractsProposal gov proposal content type to set gassless a set of contract addresses in the
+ * wasmvm cache.
+ */
+export interface SetGasLessContractsProposal {
+  /** Title is a short summary */
+  title: string;
+  /** Description is a human readable text */
+  description: string;
+  /** ContractAddresses references the new WASM addresses */
+  contractAddresses: string[];
+}
+export interface SetGasLessContractsProposalProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.SetGasLessContractsProposal";
+  value: Uint8Array;
+}
+/**
+ * SetGasLessContractsProposal gov proposal content type to set gassless a set of contract addresses in the
+ * wasmvm cache.
+ */
+export interface SetGasLessContractsProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** ContractAddresses references the new WASM addresses */
+  contract_addresses?: string[];
+}
+export interface SetGasLessContractsProposalAminoMsg {
+  type: "wasm/SetGasLessContractsProposal";
+  value: SetGasLessContractsProposalAmino;
+}
+/**
+ * SetGasLessContractsProposal gov proposal content type to set gassless a set of contract addresses in the
+ * wasmvm cache.
+ */
+export interface SetGasLessContractsProposalSDKType {
+  title: string;
+  description: string;
+  contract_addresses: string[];
+}
+/**
+ * UnsetGasLessContractsProposal gov proposal content type to unset gassless a set of contract addresses in
+ * the wasmvm cache.
+ */
+export interface UnsetGasLessContractsProposal {
+  /** Title is a short summary */
+  title: string;
+  /** Description is a human readable text */
+  description: string;
+  /** ContractAddresses references the new WASM addresses */
+  contractAddresses: string[];
+}
+export interface UnsetGasLessContractsProposalProtoMsg {
+  typeUrl: "/cosmwasm.wasm.v1.UnsetGasLessContractsProposal";
+  value: Uint8Array;
+}
+/**
+ * UnsetGasLessContractsProposal gov proposal content type to unset gassless a set of contract addresses in
+ * the wasmvm cache.
+ */
+export interface UnsetGasLessContractsProposalAmino {
+  /** Title is a short summary */
+  title?: string;
+  /** Description is a human readable text */
+  description?: string;
+  /** ContractAddresses references the new WASM addresses */
+  contract_addresses?: string[];
+}
+export interface UnsetGasLessContractsProposalAminoMsg {
+  type: "wasm/UnsetGasLessContractsProposal";
+  value: UnsetGasLessContractsProposalAmino;
+}
+/**
+ * UnsetGasLessContractsProposal gov proposal content type to unset gassless a set of contract addresses in
+ * the wasmvm cache.
+ */
+export interface UnsetGasLessContractsProposalSDKType {
+  title: string;
+  description: string;
+  contract_addresses: string[];
+}
+/**
  * AccessConfigUpdate contains the code id and the access config to be
  * applied.
  */
@@ -1961,6 +2043,196 @@ export const UnpinCodesProposal = {
     return {
       typeUrl: "/cosmwasm.wasm.v1.UnpinCodesProposal",
       value: UnpinCodesProposal.encode(message).finish()
+    };
+  }
+};
+function createBaseSetGasLessContractsProposal(): SetGasLessContractsProposal {
+  return {
+    title: "",
+    description: "",
+    contractAddresses: []
+  };
+}
+export const SetGasLessContractsProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.SetGasLessContractsProposal",
+  encode(message: SetGasLessContractsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.title !== "") {
+      writer.uint32(10).string(message.title);
+    }
+    if (message.description !== "") {
+      writer.uint32(18).string(message.description);
+    }
+    for (const v of message.contractAddresses) {
+      writer.uint32(26).string(v!);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): SetGasLessContractsProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetGasLessContractsProposal();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.title = reader.string();
+          break;
+        case 2:
+          message.description = reader.string();
+          break;
+        case 3:
+          message.contractAddresses.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<SetGasLessContractsProposal>): SetGasLessContractsProposal {
+    const message = createBaseSetGasLessContractsProposal();
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.contractAddresses = object.contractAddresses?.map(e => e) || [];
+    return message;
+  },
+  fromAmino(object: SetGasLessContractsProposalAmino): SetGasLessContractsProposal {
+    const message = createBaseSetGasLessContractsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.contractAddresses = object.contract_addresses?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: SetGasLessContractsProposal): SetGasLessContractsProposalAmino {
+    const obj: any = {};
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    if (message.contractAddresses) {
+      obj.contract_addresses = message.contractAddresses.map(e => e);
+    } else {
+      obj.contract_addresses = message.contractAddresses;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SetGasLessContractsProposalAminoMsg): SetGasLessContractsProposal {
+    return SetGasLessContractsProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: SetGasLessContractsProposal): SetGasLessContractsProposalAminoMsg {
+    return {
+      type: "wasm/SetGasLessContractsProposal",
+      value: SetGasLessContractsProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SetGasLessContractsProposalProtoMsg): SetGasLessContractsProposal {
+    return SetGasLessContractsProposal.decode(message.value);
+  },
+  toProto(message: SetGasLessContractsProposal): Uint8Array {
+    return SetGasLessContractsProposal.encode(message).finish();
+  },
+  toProtoMsg(message: SetGasLessContractsProposal): SetGasLessContractsProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.SetGasLessContractsProposal",
+      value: SetGasLessContractsProposal.encode(message).finish()
+    };
+  }
+};
+function createBaseUnsetGasLessContractsProposal(): UnsetGasLessContractsProposal {
+  return {
+    title: "",
+    description: "",
+    contractAddresses: []
+  };
+}
+export const UnsetGasLessContractsProposal = {
+  typeUrl: "/cosmwasm.wasm.v1.UnsetGasLessContractsProposal",
+  encode(message: UnsetGasLessContractsProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.title !== "") {
+      writer.uint32(10).string(message.title);
+    }
+    if (message.description !== "") {
+      writer.uint32(18).string(message.description);
+    }
+    for (const v of message.contractAddresses) {
+      writer.uint32(26).string(v!);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): UnsetGasLessContractsProposal {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUnsetGasLessContractsProposal();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.title = reader.string();
+          break;
+        case 2:
+          message.description = reader.string();
+          break;
+        case 3:
+          message.contractAddresses.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<UnsetGasLessContractsProposal>): UnsetGasLessContractsProposal {
+    const message = createBaseUnsetGasLessContractsProposal();
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.contractAddresses = object.contractAddresses?.map(e => e) || [];
+    return message;
+  },
+  fromAmino(object: UnsetGasLessContractsProposalAmino): UnsetGasLessContractsProposal {
+    const message = createBaseUnsetGasLessContractsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.contractAddresses = object.contract_addresses?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: UnsetGasLessContractsProposal): UnsetGasLessContractsProposalAmino {
+    const obj: any = {};
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    if (message.contractAddresses) {
+      obj.contract_addresses = message.contractAddresses.map(e => e);
+    } else {
+      obj.contract_addresses = message.contractAddresses;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: UnsetGasLessContractsProposalAminoMsg): UnsetGasLessContractsProposal {
+    return UnsetGasLessContractsProposal.fromAmino(object.value);
+  },
+  toAminoMsg(message: UnsetGasLessContractsProposal): UnsetGasLessContractsProposalAminoMsg {
+    return {
+      type: "wasm/UnsetGasLessContractsProposal",
+      value: UnsetGasLessContractsProposal.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: UnsetGasLessContractsProposalProtoMsg): UnsetGasLessContractsProposal {
+    return UnsetGasLessContractsProposal.decode(message.value);
+  },
+  toProto(message: UnsetGasLessContractsProposal): Uint8Array {
+    return UnsetGasLessContractsProposal.encode(message).finish();
+  },
+  toProtoMsg(message: UnsetGasLessContractsProposal): UnsetGasLessContractsProposalProtoMsg {
+    return {
+      typeUrl: "/cosmwasm.wasm.v1.UnsetGasLessContractsProposal",
+      value: UnsetGasLessContractsProposal.encode(message).finish()
     };
   }
 };

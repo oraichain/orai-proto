@@ -1,7 +1,7 @@
 import { Rpc } from "../../../helpers";
 import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryContractInfoRequest, QueryContractInfoResponse, QueryContractHistoryRequest, QueryContractHistoryResponse, QueryContractsByCodeRequest, QueryContractsByCodeResponse, QueryAllContractStateRequest, QueryAllContractStateResponse, QueryRawContractStateRequest, QueryRawContractStateResponse, QuerySmartContractStateRequest, QuerySmartContractStateResponse, QueryCodeRequest, QueryCodeResponse, QueryCodesRequest, QueryCodesResponse, QueryPinnedCodesRequest, QueryPinnedCodesResponse, QueryParamsRequest, QueryParamsResponse, QueryContractsByCreatorRequest, QueryContractsByCreatorResponse } from "./query";
+import { QueryContractInfoRequest, QueryContractInfoResponse, QueryContractHistoryRequest, QueryContractHistoryResponse, QueryContractsByCodeRequest, QueryContractsByCodeResponse, QueryAllContractStateRequest, QueryAllContractStateResponse, QueryRawContractStateRequest, QueryRawContractStateResponse, QuerySmartContractStateRequest, QuerySmartContractStateResponse, QueryCodeRequest, QueryCodeResponse, QueryCodesRequest, QueryCodesResponse, QueryPinnedCodesRequest, QueryPinnedCodesResponse, QueryGaslessContractsRequest, QueryGaslessContractsResponse, QueryParamsRequest, QueryParamsResponse, QueryContractsByCreatorRequest, QueryContractsByCreatorResponse } from "./query";
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** ContractInfo gets the contract meta data */
@@ -22,6 +22,8 @@ export interface Query {
   codes(request?: QueryCodesRequest): Promise<QueryCodesResponse>;
   /** PinnedCodes gets the pinned code ids */
   pinnedCodes(request?: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponse>;
+  /** GaslessContracts gets the gasless contract addresses */
+  gaslessContracts(request?: QueryGaslessContractsRequest): Promise<QueryGaslessContractsResponse>;
   /** Params gets the module params */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /** ContractsByCreator gets the contracts by creator */
@@ -40,6 +42,7 @@ export class QueryClientImpl implements Query {
     this.code = this.code.bind(this);
     this.codes = this.codes.bind(this);
     this.pinnedCodes = this.pinnedCodes.bind(this);
+    this.gaslessContracts = this.gaslessContracts.bind(this);
     this.params = this.params.bind(this);
     this.contractsByCreator = this.contractsByCreator.bind(this);
   }
@@ -92,6 +95,13 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("cosmwasm.wasm.v1.Query", "PinnedCodes", data);
     return promise.then(data => QueryPinnedCodesResponse.decode(new BinaryReader(data)));
   }
+  gaslessContracts(request: QueryGaslessContractsRequest = {
+    pagination: undefined
+  }): Promise<QueryGaslessContractsResponse> {
+    const data = QueryGaslessContractsRequest.encode(request).finish();
+    const promise = this.rpc.request("cosmwasm.wasm.v1.Query", "GaslessContracts", data);
+    return promise.then(data => QueryGaslessContractsResponse.decode(new BinaryReader(data)));
+  }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("cosmwasm.wasm.v1.Query", "Params", data);
@@ -133,6 +143,9 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     },
     pinnedCodes(request?: QueryPinnedCodesRequest): Promise<QueryPinnedCodesResponse> {
       return queryService.pinnedCodes(request);
+    },
+    gaslessContracts(request?: QueryGaslessContractsRequest): Promise<QueryGaslessContractsResponse> {
+      return queryService.gaslessContracts(request);
     },
     params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);

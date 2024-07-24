@@ -1,6 +1,6 @@
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryContractInfoRequest, QueryContractInfoResponseSDKType, QueryContractHistoryRequest, QueryContractHistoryResponseSDKType, QueryContractsByCodeRequest, QueryContractsByCodeResponseSDKType, QueryAllContractStateRequest, QueryAllContractStateResponseSDKType, QueryRawContractStateRequest, QueryRawContractStateResponseSDKType, QuerySmartContractStateRequest, QuerySmartContractStateResponseSDKType, QueryCodeRequest, QueryCodeResponseSDKType, QueryCodesRequest, QueryCodesResponseSDKType, QueryPinnedCodesRequest, QueryPinnedCodesResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryContractsByCreatorRequest, QueryContractsByCreatorResponseSDKType } from "./query";
+import { QueryContractInfoRequest, QueryContractInfoResponseSDKType, QueryContractHistoryRequest, QueryContractHistoryResponseSDKType, QueryContractsByCodeRequest, QueryContractsByCodeResponseSDKType, QueryAllContractStateRequest, QueryAllContractStateResponseSDKType, QueryRawContractStateRequest, QueryRawContractStateResponseSDKType, QuerySmartContractStateRequest, QuerySmartContractStateResponseSDKType, QueryCodeRequest, QueryCodeResponseSDKType, QueryCodesRequest, QueryCodesResponseSDKType, QueryPinnedCodesRequest, QueryPinnedCodesResponseSDKType, QueryGaslessContractsRequest, QueryGaslessContractsResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryContractsByCreatorRequest, QueryContractsByCreatorResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({
@@ -18,6 +18,7 @@ export class LCDQueryClient {
     this.code = this.code.bind(this);
     this.codes = this.codes.bind(this);
     this.pinnedCodes = this.pinnedCodes.bind(this);
+    this.gaslessContracts = this.gaslessContracts.bind(this);
     this.params = this.params.bind(this);
     this.contractsByCreator = this.contractsByCreator.bind(this);
   }
@@ -99,6 +100,19 @@ export class LCDQueryClient {
     }
     const endpoint = `cosmwasm/wasm/v1/codes/pinned`;
     return await this.req.get<QueryPinnedCodesResponseSDKType>(endpoint, options);
+  }
+  /* GaslessContracts gets the gasless contract addresses */
+  async gaslessContracts(params: QueryGaslessContractsRequest = {
+    pagination: undefined
+  }): Promise<QueryGaslessContractsResponseSDKType> {
+    const options: any = {
+      params: {}
+    };
+    if (typeof params?.pagination !== "undefined") {
+      setPaginationParams(options, params.pagination);
+    }
+    const endpoint = `cosmwasm/wasm/v1/codes/gasless`;
+    return await this.req.get<QueryGaslessContractsResponseSDKType>(endpoint, options);
   }
   /* Params gets the module params */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {

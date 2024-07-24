@@ -1,6 +1,6 @@
 import { setPaginationParams } from "../../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryDenomTraceRequest, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryDenomHashRequest, QueryDenomHashResponseSDKType, QueryEscrowAddressRequest, QueryEscrowAddressResponseSDKType } from "./query";
+import { QueryDenomTracesRequest, QueryDenomTracesResponseSDKType, QueryDenomTraceRequest, QueryDenomTraceResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryDenomHashRequest, QueryDenomHashResponseSDKType, QueryEscrowAddressRequest, QueryEscrowAddressResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({
@@ -9,16 +9,11 @@ export class LCDQueryClient {
     requestClient: LCDClient;
   }) {
     this.req = requestClient;
-    this.denomTrace = this.denomTrace.bind(this);
     this.denomTraces = this.denomTraces.bind(this);
+    this.denomTrace = this.denomTrace.bind(this);
     this.params = this.params.bind(this);
     this.denomHash = this.denomHash.bind(this);
     this.escrowAddress = this.escrowAddress.bind(this);
-  }
-  /* DenomTrace queries a denomination trace information. */
-  async denomTrace(params: QueryDenomTraceRequest): Promise<QueryDenomTraceResponseSDKType> {
-    const endpoint = `ibc/apps/transfer/v1/denom_traces/${params.hash}`;
-    return await this.req.get<QueryDenomTraceResponseSDKType>(endpoint);
   }
   /* DenomTraces queries all denomination traces. */
   async denomTraces(params: QueryDenomTracesRequest = {
@@ -33,6 +28,17 @@ export class LCDQueryClient {
     const endpoint = `ibc/apps/transfer/v1/denom_traces`;
     return await this.req.get<QueryDenomTracesResponseSDKType>(endpoint, options);
   }
+  /* DenomTrace queries a denomination trace information. */
+  async denomTrace(params: QueryDenomTraceRequest): Promise<QueryDenomTraceResponseSDKType> {
+    const options: any = {
+      params: {}
+    };
+    if (typeof params?.hash !== "undefined") {
+      options.params.hash = params.hash;
+    }
+    const endpoint = `ibc/apps/transfer/v1/denom_traces/${params.hash}`;
+    return await this.req.get<QueryDenomTraceResponseSDKType>(endpoint, options);
+  }
   /* Params queries all parameters of the ibc-transfer module. */
   async params(_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> {
     const endpoint = `ibc/apps/transfer/v1/params`;
@@ -40,8 +46,14 @@ export class LCDQueryClient {
   }
   /* DenomHash queries a denomination hash information. */
   async denomHash(params: QueryDenomHashRequest): Promise<QueryDenomHashResponseSDKType> {
+    const options: any = {
+      params: {}
+    };
+    if (typeof params?.trace !== "undefined") {
+      options.params.trace = params.trace;
+    }
     const endpoint = `ibc/apps/transfer/v1/denom_hashes/${params.trace}`;
-    return await this.req.get<QueryDenomHashResponseSDKType>(endpoint);
+    return await this.req.get<QueryDenomHashResponseSDKType>(endpoint, options);
   }
   /* EscrowAddress returns the escrow address for a particular port and channel id. */
   async escrowAddress(params: QueryEscrowAddressRequest): Promise<QueryEscrowAddressResponseSDKType> {

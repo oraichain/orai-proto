@@ -1,13 +1,13 @@
 import { Rpc } from "../../../../helpers";
 import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryDenomTraceRequest, QueryDenomTraceResponse, QueryDenomTracesRequest, QueryDenomTracesResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomHashRequest, QueryDenomHashResponse, QueryEscrowAddressRequest, QueryEscrowAddressResponse } from "./query";
+import { QueryDenomTracesRequest, QueryDenomTracesResponse, QueryDenomTraceRequest, QueryDenomTraceResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomHashRequest, QueryDenomHashResponse, QueryEscrowAddressRequest, QueryEscrowAddressResponse } from "./query";
 /** Query provides defines the gRPC querier service. */
 export interface Query {
-  /** DenomTrace queries a denomination trace information. */
-  denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse>;
   /** DenomTraces queries all denomination traces. */
   denomTraces(request?: QueryDenomTracesRequest): Promise<QueryDenomTracesResponse>;
+  /** DenomTrace queries a denomination trace information. */
+  denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse>;
   /** Params queries all parameters of the ibc-transfer module. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
   /** DenomHash queries a denomination hash information. */
@@ -19,16 +19,11 @@ export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.denomTrace = this.denomTrace.bind(this);
     this.denomTraces = this.denomTraces.bind(this);
+    this.denomTrace = this.denomTrace.bind(this);
     this.params = this.params.bind(this);
     this.denomHash = this.denomHash.bind(this);
     this.escrowAddress = this.escrowAddress.bind(this);
-  }
-  denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse> {
-    const data = QueryDenomTraceRequest.encode(request).finish();
-    const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "DenomTrace", data);
-    return promise.then(data => QueryDenomTraceResponse.decode(new BinaryReader(data)));
   }
   denomTraces(request: QueryDenomTracesRequest = {
     pagination: undefined
@@ -36,6 +31,11 @@ export class QueryClientImpl implements Query {
     const data = QueryDenomTracesRequest.encode(request).finish();
     const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "DenomTraces", data);
     return promise.then(data => QueryDenomTracesResponse.decode(new BinaryReader(data)));
+  }
+  denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse> {
+    const data = QueryDenomTraceRequest.encode(request).finish();
+    const promise = this.rpc.request("ibc.applications.transfer.v1.Query", "DenomTrace", data);
+    return promise.then(data => QueryDenomTraceResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
@@ -57,11 +57,11 @@ export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
   const queryService = new QueryClientImpl(rpc);
   return {
-    denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse> {
-      return queryService.denomTrace(request);
-    },
     denomTraces(request?: QueryDenomTracesRequest): Promise<QueryDenomTracesResponse> {
       return queryService.denomTraces(request);
+    },
+    denomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse> {
+      return queryService.denomTrace(request);
     },
     params(request?: QueryParamsRequest): Promise<QueryParamsResponse> {
       return queryService.params(request);
