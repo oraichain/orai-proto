@@ -6,7 +6,9 @@ import { bytesFromBase64, base64FromBytes } from "../../../helpers";
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidence {
+  /** submitter is the signer account address of evidence. */
   submitter: string;
+  /** evidence defines the evidence of misbehavior. */
   evidence?: Any;
 }
 export interface MsgSubmitEvidenceProtoMsg {
@@ -18,7 +20,9 @@ export interface MsgSubmitEvidenceProtoMsg {
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidenceAmino {
+  /** submitter is the signer account address of evidence. */
   submitter?: string;
+  /** evidence defines the evidence of misbehavior. */
   evidence?: AnyAmino;
 }
 export interface MsgSubmitEvidenceAminoMsg {

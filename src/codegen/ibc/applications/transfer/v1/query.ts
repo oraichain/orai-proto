@@ -1,5 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -276,6 +277,46 @@ export interface QueryEscrowAddressResponseAminoMsg {
 /** QueryEscrowAddressResponse is the response type of the EscrowAddress RPC method. */
 export interface QueryEscrowAddressResponseSDKType {
   escrow_address: string;
+}
+/** QueryTotalEscrowForDenomRequest is the request type for TotalEscrowForDenom RPC method. */
+export interface QueryTotalEscrowForDenomRequest {
+  denom: string;
+}
+export interface QueryTotalEscrowForDenomRequestProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.QueryTotalEscrowForDenomRequest";
+  value: Uint8Array;
+}
+/** QueryTotalEscrowForDenomRequest is the request type for TotalEscrowForDenom RPC method. */
+export interface QueryTotalEscrowForDenomRequestAmino {
+  denom?: string;
+}
+export interface QueryTotalEscrowForDenomRequestAminoMsg {
+  type: "cosmos-sdk/QueryTotalEscrowForDenomRequest";
+  value: QueryTotalEscrowForDenomRequestAmino;
+}
+/** QueryTotalEscrowForDenomRequest is the request type for TotalEscrowForDenom RPC method. */
+export interface QueryTotalEscrowForDenomRequestSDKType {
+  denom: string;
+}
+/** QueryTotalEscrowForDenomResponse is the response type for TotalEscrowForDenom RPC method. */
+export interface QueryTotalEscrowForDenomResponse {
+  amount: Coin;
+}
+export interface QueryTotalEscrowForDenomResponseProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.QueryTotalEscrowForDenomResponse";
+  value: Uint8Array;
+}
+/** QueryTotalEscrowForDenomResponse is the response type for TotalEscrowForDenom RPC method. */
+export interface QueryTotalEscrowForDenomResponseAmino {
+  amount?: CoinAmino;
+}
+export interface QueryTotalEscrowForDenomResponseAminoMsg {
+  type: "cosmos-sdk/QueryTotalEscrowForDenomResponse";
+  value: QueryTotalEscrowForDenomResponseAmino;
+}
+/** QueryTotalEscrowForDenomResponse is the response type for TotalEscrowForDenom RPC method. */
+export interface QueryTotalEscrowForDenomResponseSDKType {
+  amount: CoinSDKType;
 }
 function createBaseQueryDenomTraceRequest(): QueryDenomTraceRequest {
   return {
@@ -977,6 +1018,144 @@ export const QueryEscrowAddressResponse = {
     return {
       typeUrl: "/ibc.applications.transfer.v1.QueryEscrowAddressResponse",
       value: QueryEscrowAddressResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryTotalEscrowForDenomRequest(): QueryTotalEscrowForDenomRequest {
+  return {
+    denom: ""
+  };
+}
+export const QueryTotalEscrowForDenomRequest = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryTotalEscrowForDenomRequest",
+  encode(message: QueryTotalEscrowForDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.denom !== "") {
+      writer.uint32(10).string(message.denom);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalEscrowForDenomRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalEscrowForDenomRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryTotalEscrowForDenomRequest>): QueryTotalEscrowForDenomRequest {
+    const message = createBaseQueryTotalEscrowForDenomRequest();
+    message.denom = object.denom ?? "";
+    return message;
+  },
+  fromAmino(object: QueryTotalEscrowForDenomRequestAmino): QueryTotalEscrowForDenomRequest {
+    const message = createBaseQueryTotalEscrowForDenomRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
+  },
+  toAmino(message: QueryTotalEscrowForDenomRequest): QueryTotalEscrowForDenomRequestAmino {
+    const obj: any = {};
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTotalEscrowForDenomRequestAminoMsg): QueryTotalEscrowForDenomRequest {
+    return QueryTotalEscrowForDenomRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryTotalEscrowForDenomRequest): QueryTotalEscrowForDenomRequestAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryTotalEscrowForDenomRequest",
+      value: QueryTotalEscrowForDenomRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryTotalEscrowForDenomRequestProtoMsg): QueryTotalEscrowForDenomRequest {
+    return QueryTotalEscrowForDenomRequest.decode(message.value);
+  },
+  toProto(message: QueryTotalEscrowForDenomRequest): Uint8Array {
+    return QueryTotalEscrowForDenomRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTotalEscrowForDenomRequest): QueryTotalEscrowForDenomRequestProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryTotalEscrowForDenomRequest",
+      value: QueryTotalEscrowForDenomRequest.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryTotalEscrowForDenomResponse(): QueryTotalEscrowForDenomResponse {
+  return {
+    amount: Coin.fromPartial({})
+  };
+}
+export const QueryTotalEscrowForDenomResponse = {
+  typeUrl: "/ibc.applications.transfer.v1.QueryTotalEscrowForDenomResponse",
+  encode(message: QueryTotalEscrowForDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.amount !== undefined) {
+      Coin.encode(message.amount, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalEscrowForDenomResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryTotalEscrowForDenomResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.amount = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryTotalEscrowForDenomResponse>): QueryTotalEscrowForDenomResponse {
+    const message = createBaseQueryTotalEscrowForDenomResponse();
+    message.amount = object.amount !== undefined && object.amount !== null ? Coin.fromPartial(object.amount) : undefined;
+    return message;
+  },
+  fromAmino(object: QueryTotalEscrowForDenomResponseAmino): QueryTotalEscrowForDenomResponse {
+    const message = createBaseQueryTotalEscrowForDenomResponse();
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
+  },
+  toAmino(message: QueryTotalEscrowForDenomResponse): QueryTotalEscrowForDenomResponseAmino {
+    const obj: any = {};
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryTotalEscrowForDenomResponseAminoMsg): QueryTotalEscrowForDenomResponse {
+    return QueryTotalEscrowForDenomResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryTotalEscrowForDenomResponse): QueryTotalEscrowForDenomResponseAminoMsg {
+    return {
+      type: "cosmos-sdk/QueryTotalEscrowForDenomResponse",
+      value: QueryTotalEscrowForDenomResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryTotalEscrowForDenomResponseProtoMsg): QueryTotalEscrowForDenomResponse {
+    return QueryTotalEscrowForDenomResponse.decode(message.value);
+  },
+  toProto(message: QueryTotalEscrowForDenomResponse): Uint8Array {
+    return QueryTotalEscrowForDenomResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryTotalEscrowForDenomResponse): QueryTotalEscrowForDenomResponseProtoMsg {
+    return {
+      typeUrl: "/ibc.applications.transfer.v1.QueryTotalEscrowForDenomResponse",
+      value: QueryTotalEscrowForDenomResponse.encode(message).finish()
     };
   }
 };

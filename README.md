@@ -20,7 +20,7 @@ COSMOS_WASM_DIR=${COSMOS_WASM_DIR:-$(go list -f "{{ .Dir }}" -m github.com/CosmW
 IBC_DIR=${IBC_DIR:-$(go list -f "{{ .Dir }}" -m github.com/cosmos/ibc-go/v4)}
 
 # copy all proto files
-cp -r $PROJECTDIR/proto/* $COSMOS_SDK_DIR/proto/* $COSMOS_SDK_DIR/third_party/proto/* $IBC_DIR/proto/* $COSMOS_WASM_DIR/proto/* proto
+cp -r $PROJECTDIR/proto/* $COSMOS_SDK_DIR/proto/* $IBC_DIR/proto/* $COSMOS_WASM_DIR/proto/* proto
 
 telescope transpile
 ```

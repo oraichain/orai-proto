@@ -42,7 +42,7 @@
     "url": "https://github.com/tubackkhoa/@oraichain/proto/issues"
   },
   "devDependencies": {
-    "@cosmology/telescope": "^1.0.1",
+    "@cosmology/telescope": "^1.10.8",
     "@types/jest": "^29.5.0",
     "@types/node": "^20.12.7",
     "eslint": "8.45.0",
@@ -57,10 +57,10 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@cosmjs/amino": "0.29.4",
-    "@cosmjs/proto-signing": "0.29.4",
-    "@cosmjs/stargate": "0.29.4",
-    "@cosmjs/tendermint-rpc": "^0.29.4",
+    "@cosmjs/amino": "^0.32.4",
+    "@cosmjs/proto-signing": "^0.32.4",
+    "@cosmjs/stargate": "^0.32.4",
+    "@cosmjs/tendermint-rpc": "^0.32.4",
     "@cosmology/lcd": "^0.13.3"
   }
 }

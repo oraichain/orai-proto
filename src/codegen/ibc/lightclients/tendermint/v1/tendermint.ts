@@ -1,6 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Height, HeightAmino, HeightSDKType } from "../../../core/client/v1/client";
-import { ProofSpec, ProofSpecAmino, ProofSpecSDKType } from "../../../../proofs";
+import { ProofSpec, ProofSpecAmino, ProofSpecSDKType } from "../../../../cosmos/ics23/v1/proofs";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { MerkleRoot, MerkleRootAmino, MerkleRootSDKType } from "../../../core/commitment/v1/commitment";
 import { SignedHeader, SignedHeaderAmino, SignedHeaderSDKType } from "../../../../tendermint/types/types";
@@ -153,6 +153,8 @@ export interface ConsensusStateSDKType {
  * that implements Misbehaviour interface expected by ICS-02
  */
 export interface Misbehaviour {
+  /** ClientID is deprecated */
+  /** @deprecated */
   clientId: string;
   header1?: Header;
   header2?: Header;
@@ -166,6 +168,8 @@ export interface MisbehaviourProtoMsg {
  * that implements Misbehaviour interface expected by ICS-02
  */
 export interface MisbehaviourAmino {
+  /** ClientID is deprecated */
+  /** @deprecated */
   client_id?: string;
   header_1?: HeaderAmino;
   header_2?: HeaderAmino;
@@ -179,6 +183,7 @@ export interface MisbehaviourAminoMsg {
  * that implements Misbehaviour interface expected by ICS-02
  */
 export interface MisbehaviourSDKType {
+  /** @deprecated */
   client_id: string;
   header_1?: HeaderSDKType;
   header_2?: HeaderSDKType;
