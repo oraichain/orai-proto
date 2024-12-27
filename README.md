@@ -124,12 +124,12 @@ Here are the docs on [creating signers](https://github.com/cosmology-tech/cosmos
 
 ### Initializing the Stargate Client
 
-Use `getSigningOraichainClient` to get your `SigningStargateClient`, with the proto/amino messages full-loaded. No need to manually add amino types, just require and initialize the client:
+Use `getSigningCosmosClient` to get your `SigningStargateClient`, with the proto/amino messages full-loaded. No need to manually add amino types, just require and initialize the client:
 
 ```js
-import { getSigningOraichainClient } from "@oraichain/proto";
+import { getSigningCosmosClient } from "@oraichain/proto";
 
-const stargateClient = await getSigningOraichainClient({
+const stargateClient = await getSigningCosmosClient({
   rpcEndpoint,
   signer, // OfflineSigner
 });
