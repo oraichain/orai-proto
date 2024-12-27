@@ -1,12 +1,12 @@
-import * as _121 from "./protobuf/any";
-import * as _122 from "./protobuf/descriptor";
-import * as _123 from "./protobuf/timestamp";
-import * as _124 from "./protobuf/duration";
+import * as _101 from "./protobuf/any";
+import * as _102 from "./protobuf/descriptor";
+import * as _103 from "./protobuf/timestamp";
+import * as _104 from "./protobuf/duration";
 export namespace google {
   export const protobuf = {
-    ..._121,
-    ..._122,
-    ..._123,
-    ..._124
+    ..._101,
+    ..._102,
+    ..._103,
+    ..._104
   };
 }
