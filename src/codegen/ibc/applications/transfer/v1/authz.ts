@@ -53,6 +53,7 @@ export interface AllocationSDKType {
  * the granter's account for ibc transfer on a specific channel
  */
 export interface TransferAuthorization {
+  $typeUrl?: "/ibc.applications.transfer.v1.TransferAuthorization";
   /** port and channel amounts */
   allocations: Allocation[];
 }
@@ -77,6 +78,7 @@ export interface TransferAuthorizationAminoMsg {
  * the granter's account for ibc transfer on a specific channel
  */
 export interface TransferAuthorizationSDKType {
+  $typeUrl?: "/ibc.applications.transfer.v1.TransferAuthorization";
   allocations: AllocationSDKType[];
 }
 function createBaseAllocation(): Allocation {
@@ -204,6 +206,7 @@ export const Allocation = {
 };
 function createBaseTransferAuthorization(): TransferAuthorization {
   return {
+    $typeUrl: "/ibc.applications.transfer.v1.TransferAuthorization",
     allocations: []
   };
 }

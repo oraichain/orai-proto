@@ -209,6 +209,7 @@ export interface ParamsSDKType {
  */
 /** @deprecated */
 export interface ClientUpdateProposal {
+  $typeUrl?: "/ibc.core.client.v1.ClientUpdateProposal";
   /** the title of the update proposal */
   title: string;
   /** the description of the proposal */
@@ -261,6 +262,7 @@ export interface ClientUpdateProposalAminoMsg {
  */
 /** @deprecated */
 export interface ClientUpdateProposalSDKType {
+  $typeUrl?: "/ibc.core.client.v1.ClientUpdateProposal";
   title: string;
   description: string;
   subject_client_id: string;
@@ -274,6 +276,7 @@ export interface ClientUpdateProposalSDKType {
  */
 /** @deprecated */
 export interface UpgradeProposal {
+  $typeUrl?: "/ibc.core.client.v1.UpgradeProposal";
   title: string;
   description: string;
   plan: Plan;
@@ -324,6 +327,7 @@ export interface UpgradeProposalAminoMsg {
  */
 /** @deprecated */
 export interface UpgradeProposalSDKType {
+  $typeUrl?: "/ibc.core.client.v1.UpgradeProposal";
   title: string;
   description: string;
   plan: PlanSDKType;
@@ -625,8 +629,8 @@ export const Height = {
   },
   toAmino(message: Height): HeightAmino {
     const obj: any = {};
-    obj.revision_number = message.revisionNumber !== BigInt(0) ? message.revisionNumber.toString() : undefined;
-    obj.revision_height = message.revisionHeight !== BigInt(0) ? message.revisionHeight.toString() : undefined;
+    obj.revision_number = message.revisionNumber !== BigInt(0) ? message.revisionNumber?.toString() : undefined;
+    obj.revision_height = message.revisionHeight !== BigInt(0) ? message.revisionHeight?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: HeightAminoMsg): Height {
@@ -724,6 +728,7 @@ export const Params = {
 };
 function createBaseClientUpdateProposal(): ClientUpdateProposal {
   return {
+    $typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
     title: "",
     description: "",
     subjectClientId: "",
@@ -829,6 +834,7 @@ export const ClientUpdateProposal = {
 };
 function createBaseUpgradeProposal(): UpgradeProposal {
   return {
+    $typeUrl: "/ibc.core.client.v1.UpgradeProposal",
     title: "",
     description: "",
     plan: Plan.fromPartial({}),

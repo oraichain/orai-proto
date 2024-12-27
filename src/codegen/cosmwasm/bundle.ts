@@ -1,68 +1,62 @@
-import * as _139 from "./tokenfactory/v1beta1/authorityMetadata";
-import * as _140 from "./tokenfactory/v1beta1/genesis";
-import * as _141 from "./tokenfactory/v1beta1/params";
-import * as _142 from "./tokenfactory/v1beta1/query";
-import * as _143 from "./tokenfactory/v1beta1/tx";
-import * as _144 from "./wasm/v1/authz";
-import * as _145 from "./wasm/v1/genesis";
-import * as _146 from "./wasm/v1/ibc";
-import * as _147 from "./wasm/v1/proposal_legacy";
-import * as _148 from "./wasm/v1/proposal";
-import * as _149 from "./wasm/v1/query";
-import * as _150 from "./wasm/v1/tx";
-import * as _151 from "./wasm/v1/types";
-import * as _152 from "./wasm/v1beta1/proposal_legacy_v1beta1";
-import * as _317 from "./tokenfactory/v1beta1/tx.amino";
-import * as _318 from "./wasm/v1/tx.amino";
-import * as _319 from "./tokenfactory/v1beta1/tx.registry";
-import * as _320 from "./wasm/v1/tx.registry";
-import * as _321 from "./tokenfactory/v1beta1/query.lcd";
-import * as _322 from "./wasm/v1/query.lcd";
-import * as _323 from "./tokenfactory/v1beta1/query.rpc.Query";
-import * as _324 from "./wasm/v1/query.rpc.Query";
-import * as _325 from "./tokenfactory/v1beta1/tx.rpc.msg";
-import * as _326 from "./wasm/v1/tx.rpc.msg";
-import * as _370 from "./lcd";
-import * as _371 from "./rpc.query";
-import * as _372 from "./rpc.tx";
+import * as _106 from "./tokenfactory/v1beta1/authorityMetadata";
+import * as _107 from "./tokenfactory/v1beta1/genesis";
+import * as _108 from "./tokenfactory/v1beta1/params";
+import * as _109 from "./tokenfactory/v1beta1/query";
+import * as _110 from "./tokenfactory/v1beta1/tx";
+import * as _111 from "./wasm/v1/authz";
+import * as _112 from "./wasm/v1/genesis";
+import * as _113 from "./wasm/v1/ibc";
+import * as _114 from "./wasm/v1/proposal_legacy";
+import * as _115 from "./wasm/v1/proposal";
+import * as _116 from "./wasm/v1/query";
+import * as _117 from "./wasm/v1/tx";
+import * as _118 from "./wasm/v1/types";
+import * as _119 from "./wasm/v1beta1/proposal_legacy_v1beta1";
+import * as _236 from "./tokenfactory/v1beta1/tx.amino";
+import * as _237 from "./wasm/v1/tx.amino";
+import * as _238 from "./tokenfactory/v1beta1/tx.registry";
+import * as _239 from "./wasm/v1/tx.registry";
+import * as _240 from "./tokenfactory/v1beta1/query.rpc.Query";
+import * as _241 from "./wasm/v1/query.rpc.Query";
+import * as _242 from "./tokenfactory/v1beta1/tx.rpc.msg";
+import * as _243 from "./wasm/v1/tx.rpc.msg";
+import * as _274 from "./rpc.query";
+import * as _275 from "./rpc.tx";
 export namespace cosmwasm {
   export namespace tokenfactory {
     export const v1beta1 = {
-      ..._139,
-      ..._140,
-      ..._141,
-      ..._142,
-      ..._143,
-      ..._317,
-      ..._319,
-      ..._321,
-      ..._323,
-      ..._325
+      ..._106,
+      ..._107,
+      ..._108,
+      ..._109,
+      ..._110,
+      ..._236,
+      ..._238,
+      ..._240,
+      ..._242
     };
   }
   export namespace wasm {
     export const v1 = {
-      ..._144,
-      ..._145,
-      ..._146,
-      ..._147,
-      ..._148,
-      ..._149,
-      ..._150,
-      ..._151,
-      ..._318,
-      ..._320,
-      ..._322,
-      ..._324,
-      ..._326
+      ..._111,
+      ..._112,
+      ..._113,
+      ..._114,
+      ..._115,
+      ..._116,
+      ..._117,
+      ..._118,
+      ..._237,
+      ..._239,
+      ..._241,
+      ..._243
     };
     export const v1beta1 = {
-      ..._152
+      ..._119
     };
   }
   export const ClientFactory = {
-    ..._370,
-    ..._371,
-    ..._372
+    ..._274,
+    ..._275
   };
 }

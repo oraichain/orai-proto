@@ -601,7 +601,6 @@ export interface InnerSpecSDKType {
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProof {
-  /** BatchProof is a group of multiple proof types than can be compressed */
   entries: BatchEntry[];
 }
 export interface BatchProofProtoMsg {
@@ -610,7 +609,6 @@ export interface BatchProofProtoMsg {
 }
 /** BatchProof is a group of multiple proof types than can be compressed */
 export interface BatchProofAmino {
-  /** BatchProof is a group of multiple proof types than can be compressed */
   entries?: BatchEntryAmino[];
 }
 export interface BatchProofAminoMsg {
