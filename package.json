@@ -1,6 +1,6 @@
 {
   "name": "@oraichain/proto",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Oraichain proto ",
   "author": "tupt <tu@orai.io>",
   "homepage": "https://github.com/oraichain/orai-proto#readme",
@@ -34,11 +34,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tubackkhoa/@oraichain/proto"
+    "url": "https://github.com/oraichain/orai-proto.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/tubackkhoa/@oraichain/proto/issues"
+    "url": "https://github.com/oraichain/orai-proto.git/issues"
   },
   "devDependencies": {
     "@cosmology/telescope": "^1.11.3",
