@@ -1,6 +1,6 @@
 {
   "name": "@oraichain/proto",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Oraichain proto ",
   "author": "tupt <tu@orai.io>",
   "homepage": "https://github.com/oraichain/orai-proto#readme",
@@ -24,7 +24,6 @@
     "build:rename": "publish-scripts --cmd rename --srcDir mjs --outDir dist --findExt js --replaceExt mjs --no-rmDir",
     "build": "npm run clean && npm run build:cjs && npm run build:mjs && npm run build:rename",
     "codegen": "node scripts/codegen.js",
-    "prepare": "npm run build",
     "lint": "eslint src --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -42,7 +41,7 @@
     "url": "https://github.com/tubackkhoa/@oraichain/proto/issues"
   },
   "devDependencies": {
-    "@cosmology/telescope": "^1.10.8",
+    "@cosmology/telescope": "^1.11.3",
     "@types/jest": "^29.5.0",
     "@types/node": "^20.12.7",
     "eslint": "8.45.0",
