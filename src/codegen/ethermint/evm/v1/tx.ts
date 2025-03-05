@@ -1,11 +1,11 @@
-import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsAmino, ParamsSDKType, AccessTuple, AccessTupleAmino, AccessTupleSDKType, Log, LogAmino, LogSDKType } from "./evm";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { bytesFromBase64, base64FromBytes } from "../../../helpers";
 /** MsgEthereumTx encapsulates an Ethereum transaction as an SDK message. */
 export interface MsgEthereumTx {
   /** data is inner transaction data of the Ethereum transaction */
-  data?: Any;
+  data?: (LegacyTx & AccessListTx & DynamicFeeTx & Any) | undefined;
   /** size is the encoded storage size of the transaction (DEPRECATED) */
   size: number;
   /** hash of the transaction in hex format */
@@ -21,6 +21,9 @@ export interface MsgEthereumTxProtoMsg {
   typeUrl: "/ethermint.evm.v1.MsgEthereumTx";
   value: Uint8Array;
 }
+export type MsgEthereumTxEncoded = Omit<MsgEthereumTx, "data"> & {
+  /** data is inner transaction data of the Ethereum transaction */data?: LegacyTxProtoMsg | AccessListTxProtoMsg | DynamicFeeTxProtoMsg | AnyProtoMsg | undefined;
+};
 /** MsgEthereumTx encapsulates an Ethereum transaction as an SDK message. */
 export interface MsgEthereumTxAmino {
   /** data is inner transaction data of the Ethereum transaction */
@@ -42,7 +45,7 @@ export interface MsgEthereumTxAminoMsg {
 }
 /** MsgEthereumTx encapsulates an Ethereum transaction as an SDK message. */
 export interface MsgEthereumTxSDKType {
-  data?: AnySDKType;
+  data?: LegacyTxSDKType | AccessListTxSDKType | DynamicFeeTxSDKType | AnySDKType | undefined;
   size: number;
   hash: string;
   from: string;
@@ -53,6 +56,7 @@ export interface MsgEthereumTxSDKType {
  * AllowUnprotectedTxs parameter is disabled.
  */
 export interface LegacyTx {
+  $typeUrl?: "/ethermint.evm.v1.LegacyTx";
   /** nonce corresponds to the account nonce (transaction sequence). */
   nonce: bigint;
   /** gas_price defines the value for each gas unit */
@@ -111,6 +115,7 @@ export interface LegacyTxAminoMsg {
  * AllowUnprotectedTxs parameter is disabled.
  */
 export interface LegacyTxSDKType {
+  $typeUrl?: "/ethermint.evm.v1.LegacyTx";
   nonce: bigint;
   gas_price: string;
   gas: bigint;
@@ -123,6 +128,7 @@ export interface LegacyTxSDKType {
 }
 /** AccessListTx is the data of EIP-2930 access list transactions. */
 export interface AccessListTx {
+  $typeUrl?: "/ethermint.evm.v1.AccessListTx";
   /** chain_id of the destination EVM chain */
   chainId: string;
   /** nonce corresponds to the account nonce (transaction sequence). */
@@ -181,6 +187,7 @@ export interface AccessListTxAminoMsg {
 }
 /** AccessListTx is the data of EIP-2930 access list transactions. */
 export interface AccessListTxSDKType {
+  $typeUrl?: "/ethermint.evm.v1.AccessListTx";
   chain_id: string;
   nonce: bigint;
   gas_price: string;
@@ -195,6 +202,7 @@ export interface AccessListTxSDKType {
 }
 /** DynamicFeeTx is the data of EIP-1559 dinamic fee transactions. */
 export interface DynamicFeeTx {
+  $typeUrl?: "/ethermint.evm.v1.DynamicFeeTx";
   /** chain_id of the destination EVM chain */
   chainId: string;
   /** nonce corresponds to the account nonce (transaction sequence). */
@@ -257,6 +265,7 @@ export interface DynamicFeeTxAminoMsg {
 }
 /** DynamicFeeTx is the data of EIP-1559 dinamic fee transactions. */
 export interface DynamicFeeTxSDKType {
+  $typeUrl?: "/ethermint.evm.v1.DynamicFeeTx";
   chain_id: string;
   nonce: bigint;
   gas_tip_cap: string;
@@ -455,7 +464,7 @@ export const MsgEthereumTx = {
   typeUrl: "/ethermint.evm.v1.MsgEthereumTx",
   encode(message: MsgEthereumTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.data !== undefined) {
-      Any.encode(message.data, writer.uint32(10).fork()).ldelim();
+      Any.encode((message.data as Any), writer.uint32(10).fork()).ldelim();
     }
     if (message.size !== 0) {
       writer.uint32(17).double(message.size);
@@ -476,7 +485,7 @@ export const MsgEthereumTx = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data = Any.decode(reader, reader.uint32());
+          message.data = (Ethermint_evmv1TxData_InterfaceDecoder(reader) as Any);
           break;
         case 2:
           message.size = reader.double();
@@ -505,7 +514,7 @@ export const MsgEthereumTx = {
   fromAmino(object: MsgEthereumTxAmino): MsgEthereumTx {
     const message = createBaseMsgEthereumTx();
     if (object.data !== undefined && object.data !== null) {
-      message.data = Any.fromAmino(object.data);
+      message.data = Ethermint_evmv1TxData_FromAmino(object.data);
     }
     if (object.size !== undefined && object.size !== null) {
       message.size = object.size;
@@ -520,7 +529,7 @@ export const MsgEthereumTx = {
   },
   toAmino(message: MsgEthereumTx): MsgEthereumTxAmino {
     const obj: any = {};
-    obj.data = message.data ? Any.toAmino(message.data) : undefined;
+    obj.data = message.data ? Ethermint_evmv1TxData_ToAmino((message.data as Any)) : undefined;
     obj.size = message.size ?? 0;
     obj.hash = message.hash === "" ? undefined : message.hash;
     obj.from = message.from === "" ? undefined : message.from;
@@ -550,6 +559,7 @@ export const MsgEthereumTx = {
 };
 function createBaseLegacyTx(): LegacyTx {
   return {
+    $typeUrl: "/ethermint.evm.v1.LegacyTx",
     nonce: BigInt(0),
     gasPrice: "",
     gas: BigInt(0),
@@ -709,6 +719,7 @@ export const LegacyTx = {
 };
 function createBaseAccessListTx(): AccessListTx {
   return {
+    $typeUrl: "/ethermint.evm.v1.AccessListTx",
     chainId: "",
     nonce: BigInt(0),
     gasPrice: "",
@@ -894,6 +905,7 @@ export const AccessListTx = {
 };
 function createBaseDynamicFeeTx(): DynamicFeeTx {
   return {
+    $typeUrl: "/ethermint.evm.v1.DynamicFeeTx",
     chainId: "",
     nonce: BigInt(0),
     gasTipCap: "",
@@ -1506,5 +1518,61 @@ export const MsgSetMappingEvmAddressResponse = {
       typeUrl: "/ethermint.evm.v1.MsgSetMappingEvmAddressResponse",
       value: MsgSetMappingEvmAddressResponse.encode(message).finish()
     };
+  }
+};
+export const Ethermint_evmv1TxData_InterfaceDecoder = (input: BinaryReader | Uint8Array): LegacyTx | AccessListTx | DynamicFeeTx | Any => {
+  const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  const data = Any.decode(reader, reader.uint32());
+  switch (data.typeUrl) {
+    case "/ethermint.evm.v1.LegacyTx":
+      return LegacyTx.decode(data.value);
+    case "/ethermint.evm.v1.AccessListTx":
+      return AccessListTx.decode(data.value);
+    case "/ethermint.evm.v1.DynamicFeeTx":
+      return DynamicFeeTx.decode(data.value);
+    default:
+      return data;
+  }
+};
+export const Ethermint_evmv1TxData_FromAmino = (content: AnyAmino): Any => {
+  switch (content.type) {
+    case "/ethermint.evm.v1.LegacyTx":
+      return Any.fromPartial({
+        typeUrl: "/ethermint.evm.v1.LegacyTx",
+        value: LegacyTx.encode(LegacyTx.fromPartial(LegacyTx.fromAmino(content.value))).finish()
+      });
+    case "/ethermint.evm.v1.AccessListTx":
+      return Any.fromPartial({
+        typeUrl: "/ethermint.evm.v1.AccessListTx",
+        value: AccessListTx.encode(AccessListTx.fromPartial(AccessListTx.fromAmino(content.value))).finish()
+      });
+    case "/ethermint.evm.v1.DynamicFeeTx":
+      return Any.fromPartial({
+        typeUrl: "/ethermint.evm.v1.DynamicFeeTx",
+        value: DynamicFeeTx.encode(DynamicFeeTx.fromPartial(DynamicFeeTx.fromAmino(content.value))).finish()
+      });
+    default:
+      return Any.fromAmino(content);
+  }
+};
+export const Ethermint_evmv1TxData_ToAmino = (content: Any) => {
+  switch (content.typeUrl) {
+    case "/ethermint.evm.v1.LegacyTx":
+      return {
+        type: "/ethermint.evm.v1.LegacyTx",
+        value: LegacyTx.toAmino(LegacyTx.decode(content.value, undefined))
+      };
+    case "/ethermint.evm.v1.AccessListTx":
+      return {
+        type: "/ethermint.evm.v1.AccessListTx",
+        value: AccessListTx.toAmino(AccessListTx.decode(content.value, undefined))
+      };
+    case "/ethermint.evm.v1.DynamicFeeTx":
+      return {
+        type: "/ethermint.evm.v1.DynamicFeeTx",
+        value: DynamicFeeTx.toAmino(DynamicFeeTx.decode(content.value, undefined))
+      };
+    default:
+      return Any.toAmino(content);
   }
 };

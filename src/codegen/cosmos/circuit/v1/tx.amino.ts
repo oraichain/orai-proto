@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { MsgAuthorizeCircuitBreaker, MsgTripCircuitBreaker, MsgResetCircuitBreaker } from "./tx";
 export const AminoConverter = {
   "/cosmos.circuit.v1.MsgAuthorizeCircuitBreaker": {

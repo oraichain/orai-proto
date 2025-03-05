@@ -5,6 +5,7 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
  * authtypes.BaseAccount type. It is compatible with the auth AccountKeeper.
  */
 export interface EthAccount {
+  $typeUrl?: "/ethermint.types.v1.EthAccount";
   /** base_account is an authtypes.BaseAccount */
   baseAccount?: BaseAccount;
   /** code_hash is the hash calculated from the code contents */
@@ -33,11 +34,13 @@ export interface EthAccountAminoMsg {
  * authtypes.BaseAccount type. It is compatible with the auth AccountKeeper.
  */
 export interface EthAccountSDKType {
+  $typeUrl?: "/ethermint.types.v1.EthAccount";
   base_account?: BaseAccountSDKType;
   code_hash: string;
 }
 function createBaseEthAccount(): EthAccount {
   return {
+    $typeUrl: "/ethermint.types.v1.EthAccount",
     baseAccount: undefined,
     codeHash: ""
   };

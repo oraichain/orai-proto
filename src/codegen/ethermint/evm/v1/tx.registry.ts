@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { MsgEthereumTx, MsgUpdateParams, MsgSetMappingEvmAddress } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/ethermint.evm.v1.MsgEthereumTx", MsgEthereumTx], ["/ethermint.evm.v1.MsgUpdateParams", MsgUpdateParams], ["/ethermint.evm.v1.MsgSetMappingEvmAddress", MsgSetMappingEvmAddress]];

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { MsgEthereumTx, MsgUpdateParams, MsgSetMappingEvmAddress } from "./tx";
 export const AminoConverter = {
   "/ethermint.evm.v1.MsgEthereumTx": {

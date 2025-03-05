@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { MsgStoreCode, MsgRemoveChecksum, MsgMigrateContract } from "./tx";
 export const AminoConverter = {
   "/ibc.lightclients.wasm.v1.MsgStoreCode": {

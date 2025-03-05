@@ -20,14 +20,8 @@ export const createRPCMsgClient = async ({
     consensus: {
       v1: new (await import("./consensus/v1/tx.rpc.msg")).MsgClientImpl(rpc)
     },
-    crisis: {
-      v1beta1: new (await import("./crisis/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
-    },
     distribution: {
       v1beta1: new (await import("./distribution/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
-    },
-    evidence: {
-      v1beta1: new (await import("./evidence/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
     },
     feegrant: {
       v1beta1: new (await import("./feegrant/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
@@ -41,12 +35,6 @@ export const createRPCMsgClient = async ({
     },
     mint: {
       v1beta1: new (await import("./mint/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
-    },
-    nft: {
-      v1beta1: new (await import("./nft/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
-    },
-    slashing: {
-      v1beta1: new (await import("./slashing/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
     },
     staking: {
       v1beta1: new (await import("./staking/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)

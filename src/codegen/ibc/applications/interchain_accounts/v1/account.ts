@@ -2,6 +2,7 @@ import { BaseAccount, BaseAccountAmino, BaseAccountSDKType } from "../../../../c
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccount {
+  $typeUrl?: "/ibc.applications.interchain_accounts.v1.InterchainAccount";
   baseAccount?: BaseAccount;
   accountOwner: string;
 }
@@ -20,11 +21,13 @@ export interface InterchainAccountAminoMsg {
 }
 /** An InterchainAccount is defined as a BaseAccount & the address of the account owner on the controller chain */
 export interface InterchainAccountSDKType {
+  $typeUrl?: "/ibc.applications.interchain_accounts.v1.InterchainAccount";
   base_account?: BaseAccountSDKType;
   account_owner: string;
 }
 function createBaseInterchainAccount(): InterchainAccount {
   return {
+    $typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccount",
     baseAccount: undefined,
     accountOwner: ""
   };
