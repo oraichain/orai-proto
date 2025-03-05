@@ -66,7 +66,6 @@ export function authorizationTypeToJSON(object: AuthorizationType): string {
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorization {
-  $typeUrl?: "/cosmos.staking.v1beta1.StakeAuthorization";
   /**
    * max_tokens specifies the maximum amount of tokens can be delegate to a validator. If it is
    * empty, there is no spend limit and any amount of coins can be delegated.
@@ -117,7 +116,6 @@ export interface StakeAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface StakeAuthorizationSDKType {
-  $typeUrl?: "/cosmos.staking.v1beta1.StakeAuthorization";
   max_tokens?: CoinSDKType;
   allow_list?: StakeAuthorization_ValidatorsSDKType;
   deny_list?: StakeAuthorization_ValidatorsSDKType;
@@ -145,7 +143,6 @@ export interface StakeAuthorization_ValidatorsSDKType {
 }
 function createBaseStakeAuthorization(): StakeAuthorization {
   return {
-    $typeUrl: "/cosmos.staking.v1beta1.StakeAuthorization",
     maxTokens: undefined,
     allowList: undefined,
     denyList: undefined,
@@ -186,7 +183,7 @@ export const StakeAuthorization = {
           message.denyList = StakeAuthorization_Validators.decode(reader, reader.uint32());
           break;
         case 4:
-          message.authorizationType = (reader.int32() as any);
+          message.authorizationType = reader.int32() as any;
           break;
         default:
           reader.skipType(tag & 7);

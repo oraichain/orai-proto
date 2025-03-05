@@ -7,7 +7,6 @@ import { bytesFromBase64, base64FromBytes } from "../../../helpers";
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
-  $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
   address: string;
   pubKey?: Any;
   accountNumber: bigint;
@@ -38,7 +37,6 @@ export interface BaseAccountAminoMsg {
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountSDKType {
-  $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
   address: string;
   pub_key?: AnySDKType;
   account_number: bigint;
@@ -46,7 +44,6 @@ export interface BaseAccountSDKType {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
   baseAccount?: BaseAccount;
   name: string;
   permissions: string[];
@@ -67,7 +64,6 @@ export interface ModuleAccountAminoMsg {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
-  $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
   base_account?: BaseAccountSDKType;
   name: string;
   permissions: string[];
@@ -151,7 +147,6 @@ export interface ParamsSDKType {
 }
 function createBaseBaseAccount(): BaseAccount {
   return {
-    $typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
     address: "",
     pubKey: undefined,
     accountNumber: BigInt(0),
@@ -257,7 +252,6 @@ export const BaseAccount = {
 };
 function createBaseModuleAccount(): ModuleAccount {
   return {
-    $typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
     baseAccount: undefined,
     name: "",
     permissions: []

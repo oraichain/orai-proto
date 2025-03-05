@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { MsgRegisterInterchainAccount, MsgSendTx, MsgUpdateParams } from "./tx";
 export const AminoConverter = {
   "/ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccount": {

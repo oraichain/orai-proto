@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
 import { MsgStoreCode, MsgRemoveChecksum, MsgMigrateContract } from "./tx";
 export const registry: ReadonlyArray<[string, GeneratedType]> = [["/ibc.lightclients.wasm.v1.MsgStoreCode", MsgStoreCode], ["/ibc.lightclients.wasm.v1.MsgRemoveChecksum", MsgRemoveChecksum], ["/ibc.lightclients.wasm.v1.MsgMigrateContract", MsgMigrateContract]];

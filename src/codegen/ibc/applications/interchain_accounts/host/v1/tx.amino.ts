@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { MsgUpdateParams, MsgModuleQuerySafe } from "./tx";
 export const AminoConverter = {
   "/ibc.applications.interchain_accounts.host.v1.MsgUpdateParams": {

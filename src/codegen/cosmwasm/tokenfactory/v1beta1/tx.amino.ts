@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { MsgCreateDenom, MsgMint, MsgBurn, MsgChangeAdmin, MsgSetDenomMetadata, MsgForceTransfer } from "./tx";
 export const AminoConverter = {
   "/cosmwasm.tokenfactory.v1beta1.MsgCreateDenom": {

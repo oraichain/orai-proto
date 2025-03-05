@@ -7,7 +7,6 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
-  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spendLimit: Coin[];
   /**
    * allow_list specifies an optional list of addresses to whom the grantee can send tokens on behalf of the
@@ -48,13 +47,11 @@ export interface SendAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationSDKType {
-  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spend_limit: CoinSDKType[];
   allow_list: string[];
 }
 function createBaseSendAuthorization(): SendAuthorization {
   return {
-    $typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
     spendLimit: [],
     allowList: []
   };
