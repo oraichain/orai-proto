@@ -5,7 +5,7 @@ import { bytesFromBase64, base64FromBytes } from "../../../helpers";
 /** MsgEthereumTx encapsulates an Ethereum transaction as an SDK message. */
 export interface MsgEthereumTx {
   /** data is inner transaction data of the Ethereum transaction */
-  data?: (LegacyTx & AccessListTx & DynamicFeeTx & Any) | undefined;
+  data?: LegacyTx & AccessListTx & DynamicFeeTx & Any | undefined;
   /** size is the encoded storage size of the transaction (DEPRECATED) */
   size: number;
   /** hash of the transaction in hex format */
@@ -464,7 +464,7 @@ export const MsgEthereumTx = {
   typeUrl: "/ethermint.evm.v1.MsgEthereumTx",
   encode(message: MsgEthereumTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.data !== undefined) {
-      Any.encode((message.data as Any), writer.uint32(10).fork()).ldelim();
+      Any.encode(message.data as Any, writer.uint32(10).fork()).ldelim();
     }
     if (message.size !== 0) {
       writer.uint32(17).double(message.size);
@@ -485,7 +485,7 @@ export const MsgEthereumTx = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.data = (Ethermint_evmv1TxData_InterfaceDecoder(reader) as Any);
+          message.data = Ethermint_evmv1TxData_InterfaceDecoder(reader) as Any;
           break;
         case 2:
           message.size = reader.double();
@@ -529,7 +529,7 @@ export const MsgEthereumTx = {
   },
   toAmino(message: MsgEthereumTx): MsgEthereumTxAmino {
     const obj: any = {};
-    obj.data = message.data ? Ethermint_evmv1TxData_ToAmino((message.data as Any)) : undefined;
+    obj.data = message.data ? Ethermint_evmv1TxData_ToAmino(message.data as Any) : undefined;
     obj.size = message.size ?? 0;
     obj.hash = message.hash === "" ? undefined : message.hash;
     obj.from = message.from === "" ? undefined : message.from;

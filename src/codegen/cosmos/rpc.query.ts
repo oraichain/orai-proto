@@ -32,6 +32,17 @@ export const createRPCQueryClient = async ({
       distribution: {
         v1beta1: (await import("./distribution/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       },
+      evm: {
+        erc20: {
+          v1: (await import("./evm/erc20/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        },
+        feemarket: {
+          v1: (await import("./evm/feemarket/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        },
+        vm: {
+          v1: (await import("./evm/vm/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        }
+      },
       feegrant: {
         v1beta1: (await import("./feegrant/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       },
