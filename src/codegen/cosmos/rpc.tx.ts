@@ -23,6 +23,17 @@ export const createRPCMsgClient = async ({
     distribution: {
       v1beta1: new (await import("./distribution/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
     },
+    evm: {
+      erc20: {
+        v1: new (await import("./evm/erc20/v1/tx.rpc.msg")).MsgClientImpl(rpc)
+      },
+      feemarket: {
+        v1: new (await import("./evm/feemarket/v1/tx.rpc.msg")).MsgClientImpl(rpc)
+      },
+      vm: {
+        v1: new (await import("./evm/vm/v1/tx.rpc.msg")).MsgClientImpl(rpc)
+      }
+    },
     feegrant: {
       v1beta1: new (await import("./feegrant/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
     },
