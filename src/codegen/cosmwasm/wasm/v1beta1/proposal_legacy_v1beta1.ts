@@ -2631,7 +2631,7 @@ export const AccessConfigV1Beta1 = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.permission = reader.int32() as any;
+          message.permission = (reader.int32() as any);
           break;
         case 3:
           message.addresses.push(reader.string());

@@ -155,13 +155,13 @@ export interface ContractGrant {
    * Limit defines execution limits that are enforced and updated when the grant
    * is applied. When the limit lapsed the grant is removed.
    */
-  limit?: MaxCallsLimit & MaxFundsLimit & CombinedLimit & Any | undefined;
+  limit?: (MaxCallsLimit & MaxFundsLimit & CombinedLimit & Any) | undefined;
   /**
    * Filter define more fine-grained control on the message payload passed
    * to the contract in the operation. When no filter applies on execution, the
    * operation is prohibited.
    */
-  filter?: AllowAllMessagesFilter & AcceptedMessageKeysFilter & AcceptedMessagesFilter & Any | undefined;
+  filter?: (AllowAllMessagesFilter & AcceptedMessageKeysFilter & AcceptedMessagesFilter & Any) | undefined;
 }
 export interface ContractGrantProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractGrant";
@@ -732,10 +732,10 @@ export const ContractGrant = {
       writer.uint32(10).string(message.contract);
     }
     if (message.limit !== undefined) {
-      Any.encode(message.limit as Any, writer.uint32(18).fork()).ldelim();
+      Any.encode((message.limit as Any), writer.uint32(18).fork()).ldelim();
     }
     if (message.filter !== undefined) {
-      Any.encode(message.filter as Any, writer.uint32(26).fork()).ldelim();
+      Any.encode((message.filter as Any), writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -750,10 +750,10 @@ export const ContractGrant = {
           message.contract = reader.string();
           break;
         case 2:
-          message.limit = Cosmwasm_wasmv1ContractAuthzLimitX_InterfaceDecoder(reader) as Any;
+          message.limit = (Cosmwasm_wasmv1ContractAuthzLimitX_InterfaceDecoder(reader) as Any);
           break;
         case 3:
-          message.filter = Cosmwasm_wasmv1ContractAuthzFilterX_InterfaceDecoder(reader) as Any;
+          message.filter = (Cosmwasm_wasmv1ContractAuthzFilterX_InterfaceDecoder(reader) as Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -785,8 +785,8 @@ export const ContractGrant = {
   toAmino(message: ContractGrant): ContractGrantAmino {
     const obj: any = {};
     obj.contract = message.contract === "" ? undefined : message.contract;
-    obj.limit = message.limit ? Cosmwasm_wasmv1ContractAuthzLimitX_ToAmino(message.limit as Any) : undefined;
-    obj.filter = message.filter ? Cosmwasm_wasmv1ContractAuthzFilterX_ToAmino(message.filter as Any) : undefined;
+    obj.limit = message.limit ? Cosmwasm_wasmv1ContractAuthzLimitX_ToAmino((message.limit as Any)) : undefined;
+    obj.filter = message.filter ? Cosmwasm_wasmv1ContractAuthzFilterX_ToAmino((message.filter as Any)) : undefined;
     return obj;
   },
   fromAminoMsg(object: ContractGrantAminoMsg): ContractGrant {

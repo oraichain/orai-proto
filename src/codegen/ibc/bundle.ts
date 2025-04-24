@@ -1,212 +1,212 @@
-import * as _139 from "./applications/interchain_accounts/controller/v1/controller";
-import * as _140 from "./applications/interchain_accounts/controller/v1/query";
-import * as _141 from "./applications/interchain_accounts/controller/v1/tx";
-import * as _142 from "./applications/interchain_accounts/genesis/v1/genesis";
-import * as _143 from "./applications/interchain_accounts/host/v1/host";
-import * as _144 from "./applications/interchain_accounts/host/v1/query";
-import * as _145 from "./applications/interchain_accounts/host/v1/tx";
-import * as _146 from "./applications/interchain_accounts/v1/account";
-import * as _147 from "./applications/interchain_accounts/v1/genesis";
-import * as _148 from "./applications/interchain_accounts/v1/metadata";
-import * as _149 from "./applications/interchain_accounts/v1/packet";
-import * as _150 from "./applications/transfer/v1/authz";
-import * as _151 from "./applications/transfer/v1/genesis";
-import * as _152 from "./applications/transfer/v1/query";
-import * as _153 from "./applications/transfer/v1/transfer";
-import * as _154 from "./applications/transfer/v1/tx";
-import * as _155 from "./applications/transfer/v2/packet";
-import * as _156 from "./core/channel/v1/channel";
-import * as _157 from "./core/channel/v1/genesis";
-import * as _158 from "./core/channel/v1/query";
-import * as _159 from "./core/channel/v1/tx";
-import * as _160 from "./core/channel/v1/upgrade";
-import * as _161 from "./core/client/v1/client";
-import * as _162 from "./core/client/v1/genesis";
-import * as _163 from "./core/client/v1/query";
-import * as _164 from "./core/client/v1/tx";
-import * as _165 from "./core/commitment/v1/commitment";
-import * as _166 from "./core/connection/v1/connection";
-import * as _167 from "./core/connection/v1/genesis";
-import * as _168 from "./core/connection/v1/query";
-import * as _169 from "./core/connection/v1/tx";
-import * as _170 from "./lightclients/localhost/v1/localhost";
-import * as _171 from "./lightclients/localhost/v2/localhost";
-import * as _172 from "./lightclients/solomachine/v1/solomachine";
-import * as _173 from "./lightclients/solomachine/v2/solomachine";
-import * as _174 from "./lightclients/solomachine/v3/solomachine";
-import * as _175 from "./lightclients/tendermint/v1/tendermint";
-import * as _176 from "./lightclients/wasm/v1/genesis";
-import * as _177 from "./lightclients/wasm/v1/query";
-import * as _178 from "./lightclients/wasm/v1/tx";
-import * as _179 from "./lightclients/wasm/v1/wasm";
-import * as _278 from "./applications/interchain_accounts/controller/v1/tx.amino";
-import * as _279 from "./applications/interchain_accounts/host/v1/tx.amino";
-import * as _280 from "./applications/transfer/v1/tx.amino";
-import * as _281 from "./core/channel/v1/tx.amino";
-import * as _282 from "./core/client/v1/tx.amino";
-import * as _283 from "./core/connection/v1/tx.amino";
-import * as _284 from "./lightclients/wasm/v1/tx.amino";
-import * as _285 from "./applications/interchain_accounts/controller/v1/tx.registry";
-import * as _286 from "./applications/interchain_accounts/host/v1/tx.registry";
-import * as _287 from "./applications/transfer/v1/tx.registry";
-import * as _288 from "./core/channel/v1/tx.registry";
-import * as _289 from "./core/client/v1/tx.registry";
-import * as _290 from "./core/connection/v1/tx.registry";
-import * as _291 from "./lightclients/wasm/v1/tx.registry";
-import * as _292 from "./applications/interchain_accounts/controller/v1/query.rpc.Query";
-import * as _293 from "./applications/interchain_accounts/host/v1/query.rpc.Query";
-import * as _294 from "./applications/transfer/v1/query.rpc.Query";
-import * as _295 from "./core/channel/v1/query.rpc.Query";
-import * as _296 from "./core/client/v1/query.rpc.Query";
-import * as _297 from "./core/connection/v1/query.rpc.Query";
-import * as _298 from "./lightclients/wasm/v1/query.rpc.Query";
-import * as _299 from "./applications/interchain_accounts/controller/v1/tx.rpc.msg";
-import * as _300 from "./applications/interchain_accounts/host/v1/tx.rpc.msg";
-import * as _301 from "./applications/transfer/v1/tx.rpc.msg";
-import * as _302 from "./core/channel/v1/tx.rpc.msg";
-import * as _303 from "./core/client/v1/tx.rpc.msg";
-import * as _304 from "./core/connection/v1/tx.rpc.msg";
-import * as _305 from "./lightclients/wasm/v1/tx.rpc.msg";
-import * as _312 from "./rpc.query";
-import * as _313 from "./rpc.tx";
+import * as _159 from "./applications/interchain_accounts/controller/v1/controller";
+import * as _160 from "./applications/interchain_accounts/controller/v1/query";
+import * as _161 from "./applications/interchain_accounts/controller/v1/tx";
+import * as _162 from "./applications/interchain_accounts/genesis/v1/genesis";
+import * as _163 from "./applications/interchain_accounts/host/v1/host";
+import * as _164 from "./applications/interchain_accounts/host/v1/query";
+import * as _165 from "./applications/interchain_accounts/host/v1/tx";
+import * as _166 from "./applications/interchain_accounts/v1/account";
+import * as _167 from "./applications/interchain_accounts/v1/genesis";
+import * as _168 from "./applications/interchain_accounts/v1/metadata";
+import * as _169 from "./applications/interchain_accounts/v1/packet";
+import * as _170 from "./applications/transfer/v1/authz";
+import * as _171 from "./applications/transfer/v1/genesis";
+import * as _172 from "./applications/transfer/v1/query";
+import * as _173 from "./applications/transfer/v1/transfer";
+import * as _174 from "./applications/transfer/v1/tx";
+import * as _175 from "./applications/transfer/v2/packet";
+import * as _176 from "./core/channel/v1/channel";
+import * as _177 from "./core/channel/v1/genesis";
+import * as _178 from "./core/channel/v1/query";
+import * as _179 from "./core/channel/v1/tx";
+import * as _180 from "./core/channel/v1/upgrade";
+import * as _181 from "./core/client/v1/client";
+import * as _182 from "./core/client/v1/genesis";
+import * as _183 from "./core/client/v1/query";
+import * as _184 from "./core/client/v1/tx";
+import * as _185 from "./core/commitment/v1/commitment";
+import * as _186 from "./core/connection/v1/connection";
+import * as _187 from "./core/connection/v1/genesis";
+import * as _188 from "./core/connection/v1/query";
+import * as _189 from "./core/connection/v1/tx";
+import * as _190 from "./lightclients/localhost/v1/localhost";
+import * as _191 from "./lightclients/localhost/v2/localhost";
+import * as _192 from "./lightclients/solomachine/v1/solomachine";
+import * as _193 from "./lightclients/solomachine/v2/solomachine";
+import * as _194 from "./lightclients/solomachine/v3/solomachine";
+import * as _195 from "./lightclients/tendermint/v1/tendermint";
+import * as _196 from "./lightclients/wasm/v1/genesis";
+import * as _197 from "./lightclients/wasm/v1/query";
+import * as _198 from "./lightclients/wasm/v1/tx";
+import * as _199 from "./lightclients/wasm/v1/wasm";
+import * as _298 from "./applications/interchain_accounts/controller/v1/tx.amino";
+import * as _299 from "./applications/interchain_accounts/host/v1/tx.amino";
+import * as _300 from "./applications/transfer/v1/tx.amino";
+import * as _301 from "./core/channel/v1/tx.amino";
+import * as _302 from "./core/client/v1/tx.amino";
+import * as _303 from "./core/connection/v1/tx.amino";
+import * as _304 from "./lightclients/wasm/v1/tx.amino";
+import * as _305 from "./applications/interchain_accounts/controller/v1/tx.registry";
+import * as _306 from "./applications/interchain_accounts/host/v1/tx.registry";
+import * as _307 from "./applications/transfer/v1/tx.registry";
+import * as _308 from "./core/channel/v1/tx.registry";
+import * as _309 from "./core/client/v1/tx.registry";
+import * as _310 from "./core/connection/v1/tx.registry";
+import * as _311 from "./lightclients/wasm/v1/tx.registry";
+import * as _312 from "./applications/interchain_accounts/controller/v1/query.rpc.Query";
+import * as _313 from "./applications/interchain_accounts/host/v1/query.rpc.Query";
+import * as _314 from "./applications/transfer/v1/query.rpc.Query";
+import * as _315 from "./core/channel/v1/query.rpc.Query";
+import * as _316 from "./core/client/v1/query.rpc.Query";
+import * as _317 from "./core/connection/v1/query.rpc.Query";
+import * as _318 from "./lightclients/wasm/v1/query.rpc.Query";
+import * as _319 from "./applications/interchain_accounts/controller/v1/tx.rpc.msg";
+import * as _320 from "./applications/interchain_accounts/host/v1/tx.rpc.msg";
+import * as _321 from "./applications/transfer/v1/tx.rpc.msg";
+import * as _322 from "./core/channel/v1/tx.rpc.msg";
+import * as _323 from "./core/client/v1/tx.rpc.msg";
+import * as _324 from "./core/connection/v1/tx.rpc.msg";
+import * as _325 from "./lightclients/wasm/v1/tx.rpc.msg";
+import * as _332 from "./rpc.query";
+import * as _333 from "./rpc.tx";
 export namespace ibc {
   export namespace applications {
     export namespace interchain_accounts {
       export namespace controller {
         export const v1 = {
-          ..._139,
-          ..._140,
-          ..._141,
-          ..._278,
-          ..._285,
-          ..._292,
-          ..._299
+          ..._159,
+          ..._160,
+          ..._161,
+          ..._298,
+          ..._305,
+          ..._312,
+          ..._319
         };
       }
       export namespace genesis {
         export const v1 = {
-          ..._142
+          ..._162
         };
       }
       export namespace host {
         export const v1 = {
-          ..._143,
-          ..._144,
-          ..._145,
-          ..._279,
-          ..._286,
-          ..._293,
-          ..._300
+          ..._163,
+          ..._164,
+          ..._165,
+          ..._299,
+          ..._306,
+          ..._313,
+          ..._320
         };
       }
       export const v1 = {
-        ..._146,
-        ..._147,
-        ..._148,
-        ..._149
+        ..._166,
+        ..._167,
+        ..._168,
+        ..._169
       };
     }
     export namespace transfer {
       export const v1 = {
-        ..._150,
-        ..._151,
-        ..._152,
-        ..._153,
-        ..._154,
-        ..._280,
-        ..._287,
-        ..._294,
-        ..._301
+        ..._170,
+        ..._171,
+        ..._172,
+        ..._173,
+        ..._174,
+        ..._300,
+        ..._307,
+        ..._314,
+        ..._321
       };
       export const v2 = {
-        ..._155
+        ..._175
       };
     }
   }
   export namespace core {
     export namespace channel {
       export const v1 = {
-        ..._156,
-        ..._157,
-        ..._158,
-        ..._159,
-        ..._160,
-        ..._281,
-        ..._288,
-        ..._295,
-        ..._302
+        ..._176,
+        ..._177,
+        ..._178,
+        ..._179,
+        ..._180,
+        ..._301,
+        ..._308,
+        ..._315,
+        ..._322
       };
     }
     export namespace client {
       export const v1 = {
-        ..._161,
-        ..._162,
-        ..._163,
-        ..._164,
-        ..._282,
-        ..._289,
-        ..._296,
-        ..._303
+        ..._181,
+        ..._182,
+        ..._183,
+        ..._184,
+        ..._302,
+        ..._309,
+        ..._316,
+        ..._323
       };
     }
     export namespace commitment {
       export const v1 = {
-        ..._165
+        ..._185
       };
     }
     export namespace connection {
       export const v1 = {
-        ..._166,
-        ..._167,
-        ..._168,
-        ..._169,
-        ..._283,
-        ..._290,
-        ..._297,
-        ..._304
+        ..._186,
+        ..._187,
+        ..._188,
+        ..._189,
+        ..._303,
+        ..._310,
+        ..._317,
+        ..._324
       };
     }
   }
   export namespace lightclients {
     export namespace localhost {
       export const v1 = {
-        ..._170
+        ..._190
       };
       export const v2 = {
-        ..._171
+        ..._191
       };
     }
     export namespace solomachine {
       export const v1 = {
-        ..._172
+        ..._192
       };
       export const v2 = {
-        ..._173
+        ..._193
       };
       export const v3 = {
-        ..._174
+        ..._194
       };
     }
     export namespace tendermint {
       export const v1 = {
-        ..._175
+        ..._195
       };
     }
     export namespace wasm {
       export const v1 = {
-        ..._176,
-        ..._177,
-        ..._178,
-        ..._179,
-        ..._284,
-        ..._291,
-        ..._298,
-        ..._305
+        ..._196,
+        ..._197,
+        ..._198,
+        ..._199,
+        ..._304,
+        ..._311,
+        ..._318,
+        ..._325
       };
     }
   }
   export const ClientFactory = {
-    ..._312,
-    ..._313
+    ..._332,
+    ..._333
   };
 }
